@@ -1,2 +1,6 @@
 *
+!*/
 !/.gitignore
+!/administrator/components/com_eventcalendar/**
+!/components/com_eventcalendar/**
+!/build.sh

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="component" method="upgrade">
+    <name>com_eventcalendar</name>
+    <author>CMExtension</author>
+    <creationDate>2024-09</creationDate>
+    <copyright>(C) 2024 CMExtension</copyright>
+    <license>GNU General Public License version 2 or later</license>
+    <authorEmail>cmext.vn@gmail.com</authorEmail>
+    <authorUrl>cmextension.com</authorUrl>
+    <version>0.0.1</version>
+    <description>COM_EVENTCALENDAR_XML_DESCRIPTION</description>
+    <namespace path="src">CMExtension\Component\EventCalendar</namespace>
+    <media destination="com_eventcalendar" folder="media">
+        <folder>css</folder>
+        <folder>js</folder>
+        <file>joomla.asset.json</file>
+    </media>
+    <files folder="site">
+        <folder>src</folder>
+    </files>
+    <administration>
+        <menu>COM_EVENTCALENDAR</menu>
+        <files folder="admin">
+            <folder>forms</folder>
+            <folder>language</folder>
+            <folder>layouts</folder>
+            <folder>services</folder>
+            <folder>src</folder>
+            <folder>tmpl</folder>
+            <file>access.xml</file>
+            <file>config.xml</file>
+        </files>
+    </administration>
+
+</extension>
