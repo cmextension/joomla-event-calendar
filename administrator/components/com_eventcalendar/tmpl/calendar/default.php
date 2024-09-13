@@ -16,7 +16,7 @@ use CMExtension\Component\EventCalendar\Administrator\View\Actionlogs\HtmlView;
 /** @var Joomla\CMS\WebAsset\WebAssetManager $wa */
 $wa = $this->document->getWebAssetManager();
 $wa->useScript('keepalive')
-    ->useScript('com_eventcalendar.calendar')
-    ->useStyle('com_eventcalendar.calendar');
+    ->useScript('com_eventcalendar.calendar-admin')
+    ->useStyle('com_eventcalendar.calendar-admin');
 ?>
 <div id="ec"></div>
