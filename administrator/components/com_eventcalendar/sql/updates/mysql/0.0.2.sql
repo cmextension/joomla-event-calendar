@@ -14,8 +14,8 @@ CREATE TABLE `#__eventcalendar_events` (
   `created_by` int UNSIGNED NOT NULL DEFAULT '0',
   `modified` datetime NOT NULL,
   `modified_by` int UNSIGNED NOT NULL DEFAULT '0',
-  `checked_out` int UNSIGNED NOT NULL DEFAULT '0',
-  `checked_out_time` datetime NOT NULL
+  `checked_out` int UNSIGNED NULL DEFAULT '0',
+  `checked_out_time` datetime NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 ALTER TABLE `#__eventcalendar_events`

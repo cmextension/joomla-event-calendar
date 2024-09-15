@@ -80,7 +80,7 @@ $listDirn  = $this->escape($this->state->get('list.direction'));
                                         <?php echo HTMLHelper::_('grid.id', $i, $item->id, false, 'cid', 'cb', $item->name); ?>
                                     </td>
                                     <td class="text-center">
-                                        <?php echo HTMLHelper::_('jgrid.published', $item->state, $i, 'events.', $canChange, 'cb', $item->start_time, $item->end_time); ?>
+                                        <?php echo HTMLHelper::_('jgrid.published', $item->state, $i, 'events.', $canChange, 'cb'); ?>
                                     </td>ba
                                     <th scope="row">
                                         <div class="break-word">
