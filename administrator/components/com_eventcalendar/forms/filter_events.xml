@@ -20,6 +20,38 @@
         </field>
 
         <field
+            name="start_time"
+            type="calendar"
+            hint="COM_EVENTCALENDAR_FIELD_START_TIME_LABEL"
+            label="COM_EVENTCALENDAR_FIELD_START_TIME_LABEL"
+            translateformat="true"
+            showtime="true"
+            filter="user_utc"
+        />
+
+        <field
+            name="end_time"
+            type="calendar"
+            hint="COM_EVENTCALENDAR_FIELD_END_TIME_LABEL"
+            label="COM_EVENTCALENDAR_FIELD_END_TIME_LABEL"
+            translateformat="true"
+            showtime="true"
+            filter="user_utc"
+        />
+
+        <field
+            name="all_day"
+            type="list"
+            label="COM_EVENTCALENDAR_FIELD_ALL_DAY_LABEL"
+            class="js-select-submit-on-change"
+            default="*"
+            >
+            <option value="1">COM_EVENTCALENDAR_FILTER_ALL_DAY_EVENTS</option>
+            <option value="0">COM_EVENTCALENDAR_FILTER_NOT_ALL_DAY_EVENTS</option>
+            <option value="*">COM_EVENTCALENDAR_FILTER_ALL_EVENTS</option>
+        </field>
+
+        <field
             name="language"
             type="contentlanguage"
             label="JGRID_HEADING_LANGUAGE"
@@ -40,12 +72,16 @@
             validate="options"
             >
             <option value="">JGLOBAL_SORT_BY</option>
-            <option value="a.ordering ASC">JGRID_HEADING_ORDERING_ASC</option>
-            <option value="a.ordering DESC">JGRID_HEADING_ORDERING_DESC</option>
             <option value="a.state ASC">JSTATUS_ASC</option>
             <option value="a.state DESC">JSTATUS_DESC</option>
             <option value="a.name ASC">JGLOBAL_NAME_ASC</option>
             <option value="a.name DESC">JGLOBAL_NAME_DESC</option>
+            <option value="a.start_time ASC">COM_EVENTCALENDAR_SORT_START_TIME_ASC</option>
+            <option value="a.start_time DESC">COM_EVENTCALENDAR_SORT_START_TIME_DESC</option>
+            <option value="a.end_time ASC">COM_EVENTCALENDAR_SORT_END_TIME_ASC</option>
+            <option value="a.end_time DESC">COM_EVENTCALENDAR_SORT_END_TIME_DESC</option>
+            <option value="a.all_day ASC">COM_EVENTCALENDAR_SORT_ALL_DAY_ASC</option>
+            <option value="a.all_day DESC">COM_EVENTCALENDAR_SORT_ALL_DAY_DESC</option>
             <option value="a.language ASC" requires="multilanguage">JGRID_HEADING_LANGUAGE_ASC</option>
             <option value="a.language DESC" requires="multilanguage">JGRID_HEADING_LANGUAGE_DESC</option>
             <option value="a.id ASC">JGRID_HEADING_ID_ASC</option>

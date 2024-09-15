@@ -21,7 +21,7 @@ $displayData = [
 
 $user = $this->getCurrentUser();
 
-if ($user->authorise('core.create', 'com_eventcalendars') || count($user->getAuthorisedCategories('com_eventcalendar', 'core.create')) > 0) {
+if ($user->authorise('core.create', 'com_eventcalendar') || count($user->getAuthorisedCategories('com_eventcalendar', 'core.create')) > 0) {
     $displayData['createURL'] = 'index.php?option=com_eventcalendar&task=event.add';
 }
 

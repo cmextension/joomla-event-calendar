@@ -90,6 +90,7 @@ class EventsModel extends ListModel
         )
             ->select(
                 [
+                    $db->quoteName('l.title', 'language_title'),
                     $db->quoteName('uc.name', 'editor'),
                 ]
             )
@@ -127,6 +128,17 @@ class EventsModel extends ListModel
                 ->bind(':language', $language);
         }
 
+        // Filter by all-day state.
+        $allDay = (string) $this->getState('filter.all_day');
+
+        if (is_numeric($allDay)) {
+            $allDay = (int) $allDay;
+            $query->where($db->quoteName('a.all_day') . ' = :all_day')
+                ->bind(':all_day', $allDay, ParameterType::INTEGER);
+        } elseif ($allDay === '') {
+            $query->where($db->quoteName('a.all_day') . ' IN (0, 1)');
+        }
+
         // Add the list ordering clause.
         $orderCol  = $this->state->get('list.ordering', 'a.start_time');
         $orderDirn = $this->state->get('list.direction', 'DESC');
@@ -155,6 +167,9 @@ class EventsModel extends ListModel
     {
         // Compile the store id.
         $id .= ':' . $this->getState('filter.search');
+        $id .= ':' . $this->getState('filter.all_day');
+        $id .= ':' . $this->getState('filter.start_time');
+        $id .= ':' . $this->getState('filter.end_time');
         $id .= ':' . $this->getState('filter.published');
         $id .= ':' . $this->getState('filter.language');
 

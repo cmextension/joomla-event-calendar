@@ -20,6 +20,9 @@ CREATE TABLE `#__eventcalendar_events` (
 
 ALTER TABLE `#__eventcalendar_events`
   ADD PRIMARY KEY (`id`),
+  ADD KEY `idx_allday` (`all_day`),
+  ADD KEY `idx_starttime` (`start_time`),
+  ADD KEY `idx_endtime` (`end_time`),
   ADD KEY `idx_state` (`state`),
   ADD KEY `idx_language` (`language`);
 

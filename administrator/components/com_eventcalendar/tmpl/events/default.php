@@ -7,13 +7,13 @@
  * @license     GNU General Public License version 2 or later
  */
 
-\defined('_JEXEC') or die;
-
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Multilanguage;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\Router\Route;
+
+\defined('_JEXEC') or die;
 
 /** @var \CMExtension\Component\EventCalendar\Administrator\View\Events\HtmlView $this */
 
@@ -56,14 +56,23 @@ $listDirn  = $this->escape($this->state->get('list.direction'));
                                     <?php echo HTMLHelper::_('searchtools.sort', 'JSTATUS', 'a.state', $listDirn, $listOrder); ?>
                                 </th>
                                 <th scope="col">
-                                    <?php echo HTMLHelper::_('searchtools.sort', 'COM_EVENTCALENDAR_HEADING_NAME', 'a.name', $listDirn, $listOrder); ?>
+                                    <?php echo HTMLHelper::_('searchtools.sort', 'COM_EVENTCALENDAR_FIELD_NAME_LABEL', 'a.name', $listDirn, $listOrder); ?>
+                                </th>
+                                <th scope="col">
+                                    <?php echo HTMLHelper::_('searchtools.sort', 'COM_EVENTCALENDAR_FIELD_START_TIME_LABEL', 'a.start_time', $listDirn, $listOrder); ?>
+                                </th>
+                                <th scope="col">
+                                    <?php echo HTMLHelper::_('searchtools.sort', 'COM_EVENTCALENDAR_FIELD_END_TIME_LABEL', 'a.end_time', $listDirn, $listOrder); ?>
+                                </th>
+                                <th scope="col" class="text-center">
+                                    <?php echo HTMLHelper::_('searchtools.sort', 'COM_EVENTCALENDAR_FIELD_ALL_DAY_LABEL', 'a.all_day', $listDirn, $listOrder); ?>
                                 </th>
                                 <?php if (Multilanguage::isEnabled()) : ?>
-                                    <th scope="col" class="w-10 d-none d-md-table-cell">
+                                    <th scope="col" class="w-10 d-none d-md-table-cell text-center">
                                         <?php echo HTMLHelper::_('searchtools.sort', 'JGRID_HEADING_LANGUAGE', 'a.language', $listDirn, $listOrder); ?>
                                     </th>
                                 <?php endif; ?>
-                                <th scope="col" class="w-5 d-none d-md-table-cell">
+                                <th scope="col" class="w-5 d-none d-md-table-cell text-center">
                                     <?php echo HTMLHelper::_('searchtools.sort', 'JGRID_HEADING_ID', 'a.id', $listDirn, $listOrder); ?>
                                 </th>
                             </tr>
@@ -81,7 +90,7 @@ $listDirn  = $this->escape($this->state->get('list.direction'));
                                     </td>
                                     <td class="text-center">
                                         <?php echo HTMLHelper::_('jgrid.published', $item->state, $i, 'events.', $canChange, 'cb'); ?>
-                                    </td>ba
+                                    </td>
                                     <th scope="row">
                                         <div class="break-word">
                                             <?php if ($item->checked_out) : ?>
@@ -95,12 +104,21 @@ $listDirn  = $this->escape($this->state->get('list.direction'));
                                             <?php endif; ?>
                                         </div>
                                     </th>
+                                    <td><?php echo HTMLHelper::_('date', $item->start_time, Text::_('DATE_FORMAT_LC2')); ?></td>
+                                    <td><?php echo HTMLHelper::_('date', $item->end_time, Text::_('DATE_FORMAT_LC2')); ?></td>
+                                    <td class="text-center">
+                                        <?php if ($item->all_day) : ?>
+                                            <i class="fa fa-check"></i>
+                                        <?php else : ?>
+                                            <i class="fa fa-close"></i>
+                                        <?php endif; ?>
+                                    </td>
                                     <?php if (Multilanguage::isEnabled()) : ?>
-                                        <td class="small d-none d-md-table-cell">
+                                        <td class="small d-none d-md-table-cell text-center">
                                             <?php echo LayoutHelper::render('joomla.content.language', $item); ?>
                                         </td>
                                     <?php endif; ?>
-                                    <td class="d-none d-md-table-cell">
+                                    <td class="d-none d-md-table-cell text-center">
                                         <?php echo $item->id; ?>
                                     </td>
                                 </tr>

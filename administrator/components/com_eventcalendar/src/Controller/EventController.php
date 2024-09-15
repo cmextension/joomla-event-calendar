@@ -46,7 +46,7 @@ class EventController extends FormController
         $model = $this->getModel('Event', '', []);
 
         // Preset the redirect.
-        $this->setRedirect(Route::_('index.php?option=com_eventcalendars&view=events' . $this->getRedirectToListAppend(), false));
+        $this->setRedirect(Route::_('index.php?option=com_eventcalendar&view=events' . $this->getRedirectToListAppend(), false));
 
         return parent::batch($model);
     }

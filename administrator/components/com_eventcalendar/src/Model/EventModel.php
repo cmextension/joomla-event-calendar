@@ -13,6 +13,8 @@ use Joomla\CMS\Factory;
 use Joomla\CMS\Form\Form;
 use Joomla\CMS\MVC\Model\AdminModel;
 use Joomla\CMS\Table\Table;
+use Joomla\CMS\Event\Model;
+use Joomla\CMS\Language\Text;
 
 \defined('_JEXEC') or die;
 
@@ -38,7 +40,9 @@ class EventModel extends AdminModel
      * @since  0.0.2
      */
     protected $batch_commands = [
-        'language_id' => 'batchLanguage',
+        'language_id'   => 'batchLanguage',
+        'start_time'    => 'batchStartTime',
+        'end_time'      => 'batchEndTime'
     ];
 
     /**
@@ -148,5 +152,99 @@ class EventModel extends AdminModel
         }
 
         return parent::save($data);
+    }
+
+    /**
+     * Batch start time changes for a group of rows.
+     *
+     * @param   string  $value     The new start time.
+     * @param   array   $pks       An array of row IDs.
+     * @param   array   $contexts  An array of item contexts.
+     *
+     * @return  boolean  True if successful, false otherwise and internal error is set.
+     *
+     * @since   0.0.2
+     */
+    protected function batchStartTime($value, $pks, $contexts)
+    {
+        // Initialize re-usable member properties, and re-usable local variables.
+        $this->initBatch();
+
+        $dispatcher = $this->getDispatcher();
+
+        foreach ($pks as $pk) {
+            if ($this->user->authorise('core.edit', $contexts[$pk])) {
+                $this->table->reset();
+                $this->table->load($pk);
+                $this->table->start_time = $value;
+
+                $event = new Model\BeforeBatchEvent(
+                    $this->event_before_batch,
+                    ['src' => $this->table, 'type' => 'start_time']
+                );
+                $dispatcher->dispatch($event->getName(), $event);
+
+                try {
+                    $this->table->check();
+                    $this->table->store();
+                } catch (\RuntimeException $e) {
+                    throw new \Exception($e->getMessage(), 500, $e);
+                }
+            } else {
+                throw new \Exception(Text::_('JLIB_APPLICATION_ERROR_BATCH_CANNOT_EDIT'));
+            }
+        }
+
+        // Clean the cache.
+        $this->cleanCache();
+
+        return true;
+    }
+
+    /**
+     * Batch start end changes for a group of rows.
+     *
+     * @param   string  $value     The new start time.
+     * @param   array   $pks       An array of row IDs.
+     * @param   array   $contexts  An array of item contexts.
+     *
+     * @return  boolean  True if successful, false otherwise and internal error is set.
+     *
+     * @since   0.0.2
+     */
+    protected function batchEndTime($value, $pks, $contexts)
+    {
+        // Initialize re-usable member properties, and re-usable local variables.
+        $this->initBatch();
+
+        $dispatcher = $this->getDispatcher();
+
+        foreach ($pks as $pk) {
+            if ($this->user->authorise('core.edit', $contexts[$pk])) {
+                $this->table->reset();
+                $this->table->load($pk);
+                $this->table->end_time = $value;
+
+                $event = new Model\BeforeBatchEvent(
+                    $this->event_before_batch,
+                    ['src' => $this->table, 'type' => 'end_time']
+                );
+                $dispatcher->dispatch($event->getName(), $event);
+
+                try {
+                    $this->table->check();
+                    $this->table->store();
+                } catch (\RuntimeException $e) {
+                    throw new \Exception($e->getMessage(), 500, $e);
+                }
+            } else {
+                throw new \Exception(Text::_('JLIB_APPLICATION_ERROR_BATCH_CANNOT_EDIT'));
+            }
+        }
+
+        // Clean the cache.
+        $this->cleanCache();
+
+        return true;
     }
 }
