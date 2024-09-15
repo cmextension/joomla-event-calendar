@@ -22,11 +22,17 @@ module.exports = function(grunt) {
     },
     watch: {
       css: {
-        files: 'media/com_eventcalendar/css/*.css',
+        files: [
+          'media/com_eventcalendar/css/*.css',
+          '!media/com_eventcalendar/css/*.min.css'
+        ],
         tasks: [ 'cssmin' ]
       },
       js: {
-        files: 'media/com_eventcalendar/js/*.js',
+        files: [
+          'media/com_eventcalendar/js/*.js',
+          '!media/com_eventcalendar/js/*.min.js'
+        ],
         tasks: [ 'uglify' ]
       }
     }

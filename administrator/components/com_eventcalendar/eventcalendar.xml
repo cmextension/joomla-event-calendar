@@ -7,7 +7,7 @@
     <license>GNU General Public License version 2 or later</license>
     <authorEmail>cmext.vn@gmail.com</authorEmail>
     <authorUrl>cmextension.com</authorUrl>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
     <description>COM_EVENTCALENDAR_XML_DESCRIPTION</description>
     <namespace path="src">CMExtension\Component\EventCalendar</namespace>
     <media destination="com_eventcalendar" folder="media">
@@ -15,16 +15,36 @@
         <folder>js</folder>
         <file>joomla.asset.json</file>
     </media>
+    <install>
+        <sql>
+            <file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+        </sql>
+    </install>
+    <uninstall>
+        <sql>
+            <file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
+        </sql>
+    </uninstall>
+    <update>
+        <schemas>
+            <schemapath type="mysql">sql/updates/mysql</schemapath>
+        </schemas>
+    </update>
     <files folder="site">
         <folder>src</folder>
     </files>
     <administration>
         <menu>COM_EVENTCALENDAR</menu>
+        <submenu>
+            <menu link="option=com_eventcalendar&amp;view=calendar" view="calendar">COM_EVENTCALENDAR_SUBMENU_CALENDAR</menu>
+            <menu link="option=com_eventcalendar&amp;view=events" view="events">COM_EVENTCALENDAR_SUBMENU_EVENTS</menu>
+        </submenu>
         <files folder="admin">
             <folder>forms</folder>
             <folder>language</folder>
             <folder>layouts</folder>
             <folder>services</folder>
+            <folder>sql</folder>
             <folder>src</folder>
             <folder>tmpl</folder>
             <file>access.xml</file>
