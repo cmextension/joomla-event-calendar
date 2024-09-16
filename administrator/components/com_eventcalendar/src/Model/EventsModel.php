@@ -212,4 +212,49 @@ class EventsModel extends ListModel
         // List state information.
         parent::populateState($ordering, $direction);
     }
+
+    /**
+     * Get published events based on start time, end time and language. Used in AJAX requests.
+     *
+     * @param   string  $startTime
+     * @param   string  $endTime
+     * @param   string  $language
+     *
+     * @return  array
+     *
+     * @since   0.0.2
+     */
+    public function getPublishedEvents($startTime, $endTime, $language)
+    {
+        $db = $this->getDatabase();
+        $query = $db->getQuery(true)
+            ->select($db->quoteName([
+                'id',
+                'name',
+                'start_time',
+                'end_time',
+                'all_day',
+                'background_color',
+                'text_color',
+                'class_names',
+                'styles',
+                'language',
+                'state'
+            ]))
+            ->from($db->quoteName('#__eventcalendar_events'));
+
+        if ($startTime) {
+            $query->where($db->quoteName('start_time') . ' >= ' . $db->quote($startTime));
+        }
+
+        if ($endTime) {
+            $query->where($db->quoteName('end_time') . ' >= ' . $db->quote($endTime));
+        }
+
+        if ($language) {
+            $query->where($db->quoteName('language') . ' = ' . $db->quote($language));
+        }
+
+        return $db->setQuery($query)->loadObjectList();
+    }
 }

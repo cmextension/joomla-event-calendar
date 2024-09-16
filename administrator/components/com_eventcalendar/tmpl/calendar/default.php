@@ -10,6 +10,7 @@
 defined('_JEXEC') or die;
 
 use CMExtension\Component\EventCalendar\Administrator\View\Actionlogs\HtmlView;
+use Joomla\CMS\Session\Session;
 
 /** @var HtmlView $this */
 
@@ -20,3 +21,5 @@ $wa->useScript('keepalive')
     ->useStyle('com_eventcalendar.calendar-admin');
 ?>
 <div id="ec"></div>
+
+<input type="hidden" id="eventCalendarToken" value="<?php echo Session::getFormToken(); ?>">

@@ -31,7 +31,7 @@
       "uri": "com_eventcalendar/admin-calendar.min.js",
       "version": "0.0.1",
       "dependencies": [
-        "jquery",
+        "core",
         "com_eventcalendar.calendar-cdn"
       ],
       "attributes": {
