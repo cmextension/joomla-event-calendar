@@ -1,3 +1,5 @@
+const webpackConfig = require('./webpack-config/production.js');
+
 module.exports = function(grunt) {
   grunt.initConfig({
     cssmin: {
@@ -11,14 +13,8 @@ module.exports = function(grunt) {
         }]
       }
     },
-    uglify: {
-      files: {
-        cwd: 'media/com_eventcalendar/js',
-        src: ['*.js','!*.min.js'],
-        dest: 'media/com_eventcalendar/js',
-        expand: true,
-        ext: '.min.js'
-      },
+    webpack: {
+      myConfig: webpackConfig,
     },
     watch: {
       css: {
@@ -28,19 +24,19 @@ module.exports = function(grunt) {
         ],
         tasks: [ 'cssmin' ]
       },
-      js: {
+      webpack: {
         files: [
           'media/com_eventcalendar/js/*.js',
           '!media/com_eventcalendar/js/*.min.js'
         ],
-        tasks: [ 'uglify' ]
+        tasks: [ 'webpack' ]
       }
     }
   })
 
   grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-webpack');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
 
-  grunt.registerTask('default', [ 'cssmin', 'uglify' ]);
+  grunt.registerTask('default', [ 'cssmin', 'watch' ]);
 }

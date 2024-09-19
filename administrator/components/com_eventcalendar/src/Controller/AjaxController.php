@@ -34,13 +34,11 @@ class AjaxController extends BaseController
     public function getPublishedEvents()
     {
         if (!Session::checkToken('get')) {
-            echo new JsonResponse(null, Text::_('JINVALID_TOKEN'), true);
-
-            return;
+            throw new \Exception(Text::_('JINVALID_TOKEN'), 403);
         }
 
-        $startTime = $this->input->getString('start_time', '');
-        $endTime = $this->input->getString('end_time', '');
+        $startTime = $this->input->getString('start_time');
+        $endTime = $this->input->getString('end_time');
         $language = $this->input->getString('language', '');
 
         /** @var EventsModel $model */
@@ -55,5 +53,42 @@ class AjaxController extends BaseController
         }
 
         echo new JsonResponse($events);
+    }
+
+    /**
+     * Update start and end time of an event.
+     *
+     * @return  void
+     *
+     * @since   0.0.2
+     */
+    public function updateEventTime()
+    {
+        if (!Session::checkToken('get')) {
+            throw new \Exception(Text::_('JINVALID_TOKEN'), 403);
+        }
+
+        $id = $this->input->getUint('id', 0);
+        $startTime = $this->input->getString('start_time');
+        $endTime = $this->input->getString('end_time');
+
+        if (!$id) {
+            throw new \Exception(Text::_('COM_EVENTCALENDAR_ERROR_EVENT_NOT_FOUND'), 404);
+        }
+
+        if (!$startTime) {
+            throw new \Exception(Text::_('COM_EVENTCALENDAR_ERROR_START_TIME_REQUIRED'), 400);
+        }
+
+        if (!$endTime) {
+            throw new \Exception(Text::_('COM_EVENTCALENDAR_ERROR_END_TIME_REQUIRED'), 400);
+        }
+
+        /** @var EventModel $model */
+        $model = $this->getModel('Event', 'Administrator');
+
+        $model->updateEventTime($id, $startTime, $endTime);
+
+        echo new JsonResponse;
     }
 }

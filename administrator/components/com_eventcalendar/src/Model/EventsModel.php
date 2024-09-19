@@ -248,7 +248,7 @@ class EventsModel extends ListModel
         }
 
         if ($endTime) {
-            $query->where($db->quoteName('end_time') . ' >= ' . $db->quote($endTime));
+            $query->where($db->quoteName('end_time') . ' <= ' . $db->quote($endTime));
         }
 
         if ($language) {

@@ -9,6 +9,7 @@
 
 namespace CMExtension\Component\EventCalendar\Administrator\Helper;
 
+use Joomla\CMS\Helper\ContentHelper;
 use stdClass;
 
 \defined('_JEXEC') or die;
@@ -31,11 +32,17 @@ class EventHelper
      */
     public static function convertToJSObject($event)
     {
+        $canDo = ContentHelper::getActions('com_eventcalendar');
+        $canEdit = $canDo->get('core.edit');
+
         $newObj                     = new \stdClass;
+        $newObj->id                 = $event->id;
         $newObj->allDay             = $event->all_day;
         $newObj->start              = $event->start_time;
         $newObj->end                = $event->end_time;
         $newObj->title              = $event->name;
+        $newObj->startEditable      = $canEdit;
+        $newObj->durationEditable   = $canEdit;
         $newObj->backgroundColor    = $event->background_color;
         $newObj->textColor          = $event->text_color;
         $newObj->classNames         = $event->class_names;

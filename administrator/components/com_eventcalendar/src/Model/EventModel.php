@@ -247,4 +247,20 @@ class EventModel extends AdminModel
 
         return true;
     }
+
+    public function updateEventTime($id, $startTime, $endTime)
+    {
+        if (!$id) {
+            return;
+        }
+
+        $db = $this->getDatabase();
+        $query = $db->getQuery(true)
+            ->update($db->quoteNAme('#__eventcalendar_events'))
+            ->set($db->quoteName('start_time') . ' = ' . $db->quote($startTime))
+            ->set($db->quoteName('end_time') . ' = ' . $db->quote($endTime))
+            ->where($db->quoteName('id') . ' = ' . $db->quote($id));
+
+        $db->setQuery($query)->execute();
+    }
 }
