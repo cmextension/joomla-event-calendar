@@ -1,4 +1,8 @@
 {
+  "scripts": {
+    "watch": "grunt",
+    "build": "grunt build"
+  },
   "devDependencies": {
     "grunt": "^1.6.1",
     "grunt-contrib-cssmin": "^5.0.0",

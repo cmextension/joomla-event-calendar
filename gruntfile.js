@@ -39,4 +39,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-cssmin');
 
   grunt.registerTask('default', [ 'cssmin', 'watch' ]);
+  grunt.registerTask('build', [ 'cssmin', 'webpack' ]);
 }
