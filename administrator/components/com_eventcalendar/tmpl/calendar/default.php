@@ -18,7 +18,8 @@ use Joomla\CMS\Session\Session;
 $wa = $this->document->getWebAssetManager();
 $wa->useScript('keepalive')
     ->useScript('com_eventcalendar.calendar-admin')
-    ->useStyle('com_eventcalendar.calendar-admin');
+    ->useStyle('com_eventcalendar.calendar-admin')
+    ->useScript('joomla.dialog-autocreate');
 ?>
 <div id="ec"></div>
 

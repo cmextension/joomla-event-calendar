@@ -75,7 +75,11 @@ class HtmlView extends BaseHtmlView
             throw new GenericDataException(implode("\n", $errors), 500);
         }
 
-        $this->addToolbar();
+        if ($this->getLayout() !== 'modal') {
+            $this->addToolbar();
+        } else {
+            $this->addModalToolbar();
+        }
 
         parent::display($tpl);
     }
@@ -132,5 +136,44 @@ class HtmlView extends BaseHtmlView
         } else {
             $toolbar->cancel('event.cancel');
         }
+    }
+
+    /**
+     * Add the modal toolbar.
+     *
+     * @return  void
+     *
+     * @since   0.0.2
+     *
+     * @throws  \Exception
+     */
+    protected function addModalToolbar()
+    {
+        $user       = $this->getCurrentUser();
+        $userId     = $user->id;
+        $isNew      = ($this->item->id == 0);
+        $checkedOut = !(\is_null($this->item->checked_out) || $this->item->checked_out == $userId);
+        $toolbar    = Toolbar::getInstance();
+
+        // Build the actions for new and existing records.
+        $canDo = ContentHelper::getActions('com_eventcalendar');
+
+        ToolbarHelper::title($isNew ? Text::_('COM_EVENTCALENDAR_MANAGER_EVENT_NEW') : Text::_('COM_EVENTCALENDAR_MANAGER_EVENT_EDIT'), 'calendar');
+
+        ToolbarHelper::title(
+            Text::_('COM_EVENTCALENDAR_MANAGER_EVENT_' . ($checkedOut ? 'VIEW' : ($isNew ? 'NEW' : 'EDIT'))),
+            'pencil-alt article-add'
+        );
+
+        $canCreate = $isNew && $canDo->get('core.create');
+        $canEdit   = $canDo->get('core.edit') || ($canDo->get('core.edit.own') && $this->item->created_by == $userId);
+
+        // For new records, check the create permission.
+        if ($canCreate || $canEdit) {
+            $toolbar->apply('event.apply');
+            $toolbar->save('event.save');
+        }
+
+        $toolbar->cancel('event.cancel');
     }
 }

@@ -7,6 +7,7 @@
  * @license     GNU General Public License version 2 or later
  */
 
+use Joomla\CMS\Factory;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Layout\LayoutHelper;
@@ -22,8 +23,15 @@ $wa->useScript('keepalive')
     ->useScript('form.validate');
 
 $form = $this->form;
+
+// In case of modal
+$input      = Factory::getApplication()->getInput();
+$isModal    = $input->get('layout') === 'modal';
+$layout     = $isModal ? 'modal' : 'edit';
+$tmpl       = $input->get('tmpl');
+$tmpl       = $tmpl ? '&tmpl=' . $tmpl : '';
 ?>
-<form action="<?php echo Route::_('index.php?option=com_eventcalendar&layout=edit&id=' . (int) $this->item->id); ?>" method="post" name="adminForm" id="event-form" aria-label="<?php echo Text::_('COM_EVENTCALENDAR_MANAGER_EVENT_' . ((int) $this->item->id === 0 ? 'NEW' : 'EDIT'), true); ?>" class="form-validate">
+<form action="<?php echo Route::_('index.php?option=com_eventcalendar&layout=' . $layout . $tmpl . '&id=' . (int) $this->item->id); ?>" method="post" name="adminForm" id="event-form" aria-label="<?php echo Text::_('COM_EVENTCALENDAR_MANAGER_EVENT_' . ((int) $this->item->id === 0 ? 'NEW' : 'EDIT'), true); ?>" class="form-validate">
     <div class="main-card">
         <?php echo HTMLHelper::_('uitab.startTabSet', 'myTab', ['active' => 'details', 'recall' => true, 'breakpoint' => 768]); ?>
         <?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'details', Text::_('COM_EVENTCALENDAR_EVENT_DETAILS')); ?>
