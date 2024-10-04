@@ -14,10 +14,12 @@
 /** @var \Joomla\CMS\Document\HtmlDocument $doc */
 $doc = $this->getDocument();
 ?>
-<div class="subhead noshadow mb-3">
-    <?php echo $doc->getToolbar('toolbar')->render(); ?>
-</div>
-<div class="container-popup">
-    <?php $this->setLayout('edit'); ?>
-    <?php echo $this->loadTemplate(); ?>
+<div class="com_eventcalendar">
+    <div class="subhead noshadow mb-3">
+        <?php echo $doc->getToolbar('toolbar')->render(); ?>
+    </div>
+    <div class="container-popup">
+        <?php $this->setLayout('edit'); ?>
+        <?php echo $this->loadTemplate(); ?>
+    </div>
 </div>
