@@ -64,18 +64,29 @@ class EventModel extends AdminModel
             return false;
         }
 
-        // Modify the form based on access controls.
-        if (!$this->canEditState((object) $data)) {
-            // Disable fields for display.
-            $form->setFieldAttribute('start_time', 'disabled', 'true');
-            $form->setFieldAttribute('end_time', 'disabled', 'true');
-            $form->setFieldAttribute('state', 'disabled', 'true');
+        $canEdit = $this->getCurrentUser()->authorise('core.edit', $this->option);
 
-            // Disable fields while saving.
-            // The controller has already verified this is a record you can edit.
-            $form->setFieldAttribute('start_time', 'filter', 'unset');
-            $form->setFieldAttribute('end_time', 'filter', 'unset');
-            $form->setFieldAttribute('state', 'filter', 'unset');
+        // If user is not allowed to edit, we disable all fields to avoid confusion.
+        if (!$canEdit) {
+            foreach ($form->getFieldsets() as $fieldset) {
+                foreach ($form->getFieldset($fieldset->name) as $field) {
+                    $form->setFieldAttribute($field->fieldname, 'disabled', 'true');
+                }
+            }
+        } else {
+            // Modify the form based on access controls.
+            if (!$this->canEditState((object) $data)) {
+                // Disable fields for display.
+                $form->setFieldAttribute('start_time', 'disabled', 'true');
+                $form->setFieldAttribute('end_time', 'disabled', 'true');
+                $form->setFieldAttribute('state', 'disabled', 'true');
+
+                // Disable fields while saving.
+                // The controller has already verified this is a record you can edit.
+                $form->setFieldAttribute('start_time', 'filter', 'unset');
+                $form->setFieldAttribute('end_time', 'filter', 'unset');
+                $form->setFieldAttribute('state', 'filter', 'unset');
+            }
         }
 
         // Don't allow to change the created_by user if not allowed to access com_users.

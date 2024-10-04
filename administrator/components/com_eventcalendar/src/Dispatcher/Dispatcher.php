@@ -31,8 +31,9 @@ class Dispatcher extends ComponentDispatcher
     protected function checkAccess()
     {
         $user = $this->app->getIdentity();
+        $canManage = $user->authorise('core.manage', 'com_eventcalendar');
 
-        if (!$user->authorise('core.admin')) {
+        if (!$canManage) {
             throw new NotAllowed($this->app->getLanguage()->_('JERROR_ALERTNOAUTHOR'), 403);
         }
     }
