@@ -35,6 +35,7 @@ let ec;
   const onEventChange = (event) => {
     const startTime = moment(event.start).format('YYYY-MM-DD HH:mm:ss');
     const endTime = moment(event.end).format('YYYY-MM-DD HH:mm:ss');
+
     let url = 'index.php?option=com_eventcalendar&task=ajax.updateEventTime&format=json'
     url += '&' + Joomla.getOptions('csrf.token', '') + '=1';
 
@@ -117,7 +118,11 @@ let ec;
           let startDate = new Date(fetchInfo.event.start);
 
           let html = '';
-          html += '<time class="ec-event-time" datetime="' + startDate.toISOString() + '" data-joomla-dialog="' + htmlspecialchars(JSON.stringify(config)) + '">' + fetchInfo.timeText + '</time>';
+
+          if (!fetchInfo.event.allDay) {
+            html += '<time class="ec-event-time" datetime="' + startDate.toISOString() + '" data-joomla-dialog="' + htmlspecialchars(JSON.stringify(config)) + '">' + fetchInfo.timeText + '</time>';
+          }
+
           html += '<h4 class="ec-event-title" data-joomla-dialog="' + htmlspecialchars(JSON.stringify(config)) + '">' + fetchInfo.event.title + '</h4>';
 
           return { html: html };
