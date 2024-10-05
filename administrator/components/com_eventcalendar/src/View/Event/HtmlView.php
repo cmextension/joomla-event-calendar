@@ -165,13 +165,18 @@ class HtmlView extends BaseHtmlView
             'pencil-alt article-add'
         );
 
-        $canCreate = $isNew && $canDo->get('core.create');
-        $canEdit   = $canDo->get('core.edit') || ($canDo->get('core.edit.own') && $this->item->created_by == $userId);
+        $canCreate  = $isNew && $canDo->get('core.create');
+        $canEdit    = $canDo->get('core.edit') || ($canDo->get('core.edit.own') && $this->item->created_by == $userId);
+        $canDelete  = !$isNew && $canDo->get('core.delete');
 
         // For new records, check the create permission.
         if ($canCreate || $canEdit) {
             $toolbar->apply('event.apply');
             $toolbar->save('event.save');
+        }
+
+        if ($canDelete) {
+            $toolbar->delete('events.delete');
         }
 
         $toolbar->cancel('event.cancel');

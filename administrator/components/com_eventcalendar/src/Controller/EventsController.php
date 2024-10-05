@@ -10,6 +10,7 @@
 namespace CMExtension\Component\EventCalendar\Administrator\Controller;
 
 use Joomla\CMS\MVC\Controller\AdminController;
+use Joomla\CMS\Router\Route;
 
 \defined('_JEXEC') or die;
 
@@ -42,5 +43,27 @@ class EventsController extends AdminController
     public function getModel($name = 'Event', $prefix = 'Administrator', $config = ['ignore_request' => true])
     {
         return parent::getModel($name, $prefix, $config);
+    }
+
+    /**
+     * Function that allows child controller access to model data
+     * after the item has been deleted.
+     *
+     * @param   BaseDatabaseModel  $model  The data model object.
+     * @param   integer[]          $id     An array of deleted IDs.
+     *
+     * @return  void
+     *
+     * @since   0.0.2
+     */
+    protected function postDeleteHook($model, $id = null)
+    {
+
+        if ($this->input->get('layout') === 'modal') {
+            $return = 'index.php?option=' . $this->option . '&view=' . $this->view_list . $this->getRedirectToListAppend() . '&layout=modalreturn';
+
+            $this->setRedirect(Route::_($return, false));
+            $this->redirect();
+        }
     }
 }

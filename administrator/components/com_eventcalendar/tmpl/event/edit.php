@@ -60,5 +60,9 @@ $tmpl       = $tmpl ? '&tmpl=' . $tmpl : '';
 
             <input type="hidden" name="task" value="">
             <?php echo HTMLHelper::_('form.token'); ?>
+
+            <?php if ($isModal && $this->item->id) : ?>
+                <input type="hidden" name="cid[]" value="<?php echo $this->item->id; ?>" />
+            <?php endif; ?>
     </form>
 </div>

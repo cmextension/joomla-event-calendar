@@ -9,7 +9,6 @@
 
 namespace CMExtension\Component\EventCalendar\Administrator\View\Events;
 
-use Joomla\CMS\Component\ComponentHelper;
 use Joomla\CMS\Form\Form;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\MVC\View\GenericDataException;
@@ -99,7 +98,7 @@ class HtmlView extends BaseHtmlView
         $this->filterForm    = $model->getFilterForm();
         $this->activeFilters = $model->getActiveFilters();
 
-        if (!\count($this->items) && $this->isEmptyState = $this->get('IsEmptyState')) {
+        if ($this->getLayout() != 'modalreturn' && !\count($this->items) && $this->isEmptyState = $this->get('IsEmptyState')) {
             $this->setLayout('emptystate');
         }
 
@@ -107,7 +106,9 @@ class HtmlView extends BaseHtmlView
             throw new GenericDataException(implode("\n", $errors), 500);
         }
 
-        $this->addToolbar();
+        if ($this->getLayout() !== 'modalreturn') {
+            $this->addToolbar();
+        }
 
         parent::display($tpl);
     }
