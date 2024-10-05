@@ -58,8 +58,26 @@ class EventTable extends Table
             return false;
         }
 
-        // Set name.
-        $this->name = htmlspecialchars_decode($this->name, ENT_QUOTES);
+        // Check for valid name.
+        if (trim($this->name) === '') {
+            $this->setError(Text::_('COM_EVENTCALENDAR_ERROR_PROVIDE_VALID_NAME'));
+
+            return false;
+        }
+
+        // Check for date and time.
+        if (trim($this->start_time) === '') {
+            $this->setError(Text::_('COM_EVENTCALENDAR_ERROR_PROVIDE_VALID_START_TIME'));
+
+            return false;
+        }
+
+        if (trim($this->end_time) === '') {
+            $this->setError(Text::_('COM_EVENTCALENDAR_ERROR_PROVIDE_VALID_END_TIME'));
+
+            return false;
+        }
+
 
         // Set created date if not set.
         if (!(int) $this->created) {

@@ -36,6 +36,7 @@
             translateformat="true"
             showtime="true"
             filter="user_utc"
+            required="true"
         />
 
         <field
@@ -45,6 +46,7 @@
             translateformat="true"
             showtime="true"
             filter="user_utc"
+            required="true"
         />
 
         <field
