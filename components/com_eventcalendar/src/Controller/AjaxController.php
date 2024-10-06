@@ -7,7 +7,7 @@
  * @license     GNU General Public License version 2 or later
  */
 
-namespace CMExtension\Component\EventCalendar\Administrator\Controller;
+namespace CMExtension\Component\EventCalendar\Site\Controller;
 
 use CMExtension\Component\EventCalendar\Administrator\Helper\EventHelper;
 use Joomla\CMS\Factory;
@@ -43,7 +43,7 @@ class AjaxController extends BaseController
         $language = $this->input->getString('language', Factory::getApplication()->getLanguage()->getTag());
 
         /** @var EventsModel $model */
-        $model = $this->getModel('Events', 'Administrator');
+        $model = $this->getModel('Events', 'Site');
 
         $events = $model->getPublishedEvents($startTime, $endTime, $language);
 
@@ -54,42 +54,5 @@ class AjaxController extends BaseController
         }
 
         echo new JsonResponse($events);
-    }
-
-    /**
-     * Update start and end time of an event.
-     *
-     * @return  void
-     *
-     * @since   0.0.2
-     */
-    public function updateEventTime()
-    {
-        if (!Session::checkToken('get')) {
-            throw new \Exception(Text::_('JINVALID_TOKEN'), 403);
-        }
-
-        $id = $this->input->getUint('id', 0);
-        $startTime = $this->input->getString('start_time');
-        $endTime = $this->input->getString('end_time');
-
-        if (!$id) {
-            throw new \Exception(Text::_('COM_EVENTCALENDAR_ERROR_EVENT_NOT_FOUND'), 404);
-        }
-
-        if (!$startTime) {
-            throw new \Exception(Text::_('COM_EVENTCALENDAR_ERROR_START_TIME_REQUIRED'), 400);
-        }
-
-        if (!$endTime) {
-            throw new \Exception(Text::_('COM_EVENTCALENDAR_ERROR_END_TIME_REQUIRED'), 400);
-        }
-
-        /** @var EventModel $model */
-        $model = $this->getModel('Event', 'Administrator');
-
-        $model->updateEventTime($id, $startTime, $endTime);
-
-        echo new JsonResponse;
     }
 }

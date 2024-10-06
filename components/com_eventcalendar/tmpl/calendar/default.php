@@ -14,3 +14,9 @@ $wa = $this->document->getWebAssetManager();
 $wa->useScript('keepalive')
     ->useScript('com_eventcalendar.site-calendar')
     ->useStyle('com_eventcalendar.site-calendar');
+?>
+<div class="com_eventcalendar">
+    <div class="calendar-container">
+        <div id="ec"></div>
+    </div>
+</div>

@@ -244,15 +244,24 @@ class EventsModel extends ListModel
             ->from($db->quoteName('#__eventcalendar_events'));
 
         if ($startTime) {
-            $query->where($db->quoteName('start_time') . ' >= ' . $db->quote($startTime));
+            $query->where($db->quoteName('start_time') . ' >= :startTime')
+                ->bind(':startTime', $startTime);
         }
 
         if ($endTime) {
-            $query->where($db->quoteName('end_time') . ' <= ' . $db->quote($endTime));
+            $query->where($db->quoteName('end_time') . ' <= :endTime')
+                ->bind(':endTime', $endTime);
         }
 
         if ($language) {
-            $query->where($db->quoteName('language') . ' = ' . $db->quote($language));
+            $allLanguages = '*';
+
+            $query->where('(' .
+                $db->quoteName('language') . ' = :language1 OR ' .
+                $db->quoteName('language') . ' = :language2' .
+                ')')
+                ->bind(':language1', $language)
+                ->bind(':language2', $allLanguages);
         }
 
         return $db->setQuery($query)->loadObjectList();
