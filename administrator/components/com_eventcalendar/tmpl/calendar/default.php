@@ -19,8 +19,8 @@ use Joomla\CMS\Session\Session;
 /** @var Joomla\CMS\WebAsset\WebAssetManager $wa */
 $wa = $this->document->getWebAssetManager();
 $wa->useScript('keepalive')
-    ->useScript('com_eventcalendar.calendar-admin')
-    ->useStyle('com_eventcalendar.calendar-admin')
+    ->useScript('com_eventcalendar.admin-calendar')
+    ->useStyle('com_eventcalendar.admin-calendar')
     ->useScript('joomla.dialog-autocreate');
 
 $popupOptions = [

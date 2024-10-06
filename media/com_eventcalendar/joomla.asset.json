@@ -6,11 +6,11 @@
   "license": "GPL-2.0-or-later",
   "assets": [
     {
-      "name": "com_eventcalendar.calendar-admin",
+      "name": "com_eventcalendar.admin-calendar",
       "type": "preset",
       "dependencies": [
-        "com_eventcalendar.calendar-admin#style",
-        "com_eventcalendar.calendar-admin#script"
+        "com_eventcalendar.admin-calendar#style",
+        "com_eventcalendar.admin-calendar#script"
       ]
     },
     {
@@ -26,7 +26,7 @@
       "version": "3.6.1"
     },
     {
-      "name": "com_eventcalendar.calendar-admin",
+      "name": "com_eventcalendar.admin-calendar",
       "type": "script",
       "uri": "com_eventcalendar/admin-calendar.min.js",
       "version": "0.0.2",
@@ -40,9 +40,32 @@
       }
     },
     {
-      "name": "com_eventcalendar.calendar-admin",
+      "name": "com_eventcalendar.admin-calendar",
       "type": "style",
       "uri": "com_eventcalendar/admin-calendar.min.css",
+      "version": "0.0.2",
+      "dependencies": [
+        "com_eventcalendar.calendar-cdn"
+      ]
+    },
+    {
+      "name": "com_eventcalendar.site-calendar",
+      "type": "script",
+      "uri": "com_eventcalendar/calendar.min.js",
+      "version": "0.0.2",
+      "dependencies": [
+        "core",
+        "jquery",
+        "com_eventcalendar.calendar-cdn"
+      ],
+      "attributes": {
+        "type": "module"
+      }
+    },
+    {
+      "name": "com_eventcalendar.site-calendar",
+      "type": "style",
+      "uri": "com_eventcalendar/calendar.min.css",
       "version": "0.0.2",
       "dependencies": [
         "com_eventcalendar.calendar-cdn"

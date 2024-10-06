@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "watch": "grunt",
+    "watch": "grunt watch",
     "build": "grunt build"
   },
   "devDependencies": {

@@ -1,4 +1,5 @@
-const webpackConfig = require('./webpack-config/production.js');
+const productionWebpackConfig = require('./webpack-config/production.js');
+const developmentWebpackConfig = require('./webpack-config/development.js');
 
 module.exports = function(grunt) {
   grunt.initConfig({
@@ -14,7 +15,8 @@ module.exports = function(grunt) {
       }
     },
     webpack: {
-      myConfig: webpackConfig,
+      production: productionWebpackConfig,
+      development: developmentWebpackConfig,
     },
     watch: {
       css: {
@@ -26,10 +28,9 @@ module.exports = function(grunt) {
       },
       webpack: {
         files: [
-          'media/com_eventcalendar/js/*.js',
-          '!media/com_eventcalendar/js/*.min.js'
+          'media/com_eventcalendar/src/js/*.js'
         ],
-        tasks: [ 'webpack' ]
+        tasks: [ 'webpack:production', 'webpack:development' ]
       }
     }
   })
@@ -38,6 +39,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-webpack');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
 
-  grunt.registerTask('default', [ 'cssmin', 'watch' ]);
-  grunt.registerTask('build', [ 'cssmin', 'webpack' ]);
+  grunt.registerTask('default', [ 'watch' ]);
+  grunt.registerTask('build', [ 'cssmin', 'webpack:production' ]);
 }

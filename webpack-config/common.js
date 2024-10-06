@@ -1,32 +1,16 @@
 const path = require('path');
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
 
 const rootDir = path.resolve(__dirname, '..');
-const baseDir = path.resolve(rootDir, 'media/com_eventcalendar/js');
+const srcDir = path.resolve(rootDir, 'media/com_eventcalendar/src/js');
 
 module.exports = {
-  mode: 'development',
-  entry: path.resolve(baseDir, 'admin-calendar.js'),
-  output: {
-    filename: 'admin-calendar.min.js',
-    path: baseDir,
+  entry: {
+    'admin-calendar': path.resolve(srcDir, 'admin-calendar.js'),
+    'calendar': path.resolve(srcDir, 'calendar.js'),
   },
   plugins: [
     // To strip all locales except "en".
     new MomentLocalesPlugin(),
-  ],
-  optimization: {
-    minimize: true,
-    minimizer: [
-      new TerserPlugin({
-        terserOptions: {
-          format: {
-            comments: false,
-          },
-        },
-        extractComments: false,
-      }),
-    ],
-  },
+  ]
 };
