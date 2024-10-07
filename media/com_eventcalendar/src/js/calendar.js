@@ -34,6 +34,7 @@ let ec;
   // The boot sequence.
   const onBoot = () => {
     ec = new EventCalendar(document.getElementById('ec'), {
+      locale: eventCalendarLocale,
       view: 'timeGridWeek',
       events: [],
       eventSources: [

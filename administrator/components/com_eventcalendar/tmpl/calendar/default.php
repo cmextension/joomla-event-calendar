@@ -16,12 +16,15 @@ use Joomla\CMS\Session\Session;
 
 /** @var HtmlView $this */
 
+$language = $this->app->getLanguage()->getTag();
+
 /** @var Joomla\CMS\WebAsset\WebAssetManager $wa */
 $wa = $this->document->getWebAssetManager();
 $wa->useScript('keepalive')
     ->useScript('com_eventcalendar.admin-calendar')
     ->useStyle('com_eventcalendar.admin-calendar')
-    ->useScript('joomla.dialog-autocreate');
+    ->useScript('joomla.dialog-autocreate')
+    ->addInlineScript('let eventCalendarLocale = "' . $language . '";');
 
 $popupOptions = [
     'popupType'  => 'iframe',

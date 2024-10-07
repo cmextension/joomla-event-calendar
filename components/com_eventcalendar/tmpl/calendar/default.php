@@ -9,11 +9,14 @@
 
 \defined('_JEXEC') or die;
 
+$language = $this->app->getLanguage()->getTag();
+
 /** @var Joomla\CMS\WebAsset\WebAssetManager $wa */
 $wa = $this->document->getWebAssetManager();
 $wa->useScript('keepalive')
     ->useScript('com_eventcalendar.site-calendar')
-    ->useStyle('com_eventcalendar.site-calendar');
+    ->useStyle('com_eventcalendar.site-calendar')
+    ->addInlineScript('let eventCalendarLocale = "' . $language . '";');
 ?>
 <div class="com_eventcalendar">
     <div class="calendar-container">
