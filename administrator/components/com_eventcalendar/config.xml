@@ -1,9 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
     <fieldset
+        name="general"
+        label="COM_EVENTCALENDAR_CONFIG_FIELDSET_CALENDAR"
+    >
+        <field
+            name="default_calendar_view"
+            type="list"
+            layout="joomla.form.field.list-fancy-select"
+            validate="options"
+            default="timeGridWeek"
+            label="COM_EVENTCALENDAR_CONFIG_FIELD_DEFAULT_CALENDAR_VIEW"
+        >
+            <option value="dayGridMonth">dayGridMonth</option>
+            <option value="listDay">listDay</option>
+            <option value="listWeek">listWeek</option>
+            <option value="listMonth">listMonth</option>
+            <option value="listYear">listYear</option>
+            <option value="resourceTimeGridDay">resourceTimeGridDay</option>
+            <option value="resourceTimeGridWeek">resourceTimeGridWeek</option>
+            <option value="resourceTimelineDay">resourceTimelineDay</option>
+            <option value="resourceTimelineWeek">resourceTimelineWeek</option>
+            <option value="resourceTimelineMonth">resourceTimelineMonth</option>
+            <option value="timeGridDay">timeGridDay</option>
+            <option value="timeGridWeek">timeGridWeek</option>
+        </field>
+    </fieldset>
+
+    <fieldset
         name="permissions"
         label="JCONFIG_PERMISSIONS_LABEL"
-        >
+    >
 
         <field
             name="rules"

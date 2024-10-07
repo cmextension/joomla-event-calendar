@@ -16,7 +16,13 @@ use Joomla\CMS\Session\Session;
 
 /** @var HtmlView $this */
 
-$language = $this->app->getLanguage()->getTag();
+$eventCalendarLocale = $this->app->getLanguage()->getTag();
+$eventCalendarView = $this->params->get('default_calendar_view', 'timeGridWeek');
+
+$eventCalendarConfig = [
+    'locale'    => $eventCalendarLocale,
+    'view'      => $eventCalendarView,
+];
 
 /** @var Joomla\CMS\WebAsset\WebAssetManager $wa */
 $wa = $this->document->getWebAssetManager();
@@ -24,7 +30,7 @@ $wa->useScript('keepalive')
     ->useScript('com_eventcalendar.admin-calendar')
     ->useStyle('com_eventcalendar.admin-calendar')
     ->useScript('joomla.dialog-autocreate')
-    ->addInlineScript('let eventCalendarLocale = "' . $language . '";');
+    ->addInlineScript('let eventCalendarConfig = ' . json_encode($eventCalendarConfig) . ';');
 
 $popupOptions = [
     'popupType'  => 'iframe',

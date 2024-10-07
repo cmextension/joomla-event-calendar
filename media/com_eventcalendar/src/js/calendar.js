@@ -1,9 +1,18 @@
 const moment = require('moment');
 let ec;
 
-((Joomla, document) => {
+((Joomla, document, eventCalendarConfig) => {
   if (!Joomla) {
     throw new Error('core.js was not properly initialised');
+  }
+
+  console.log(eventCalendarConfig)
+
+  if (!eventCalendarConfig) {
+    eventCalendarConfig = {
+      locale: 'en-GB',
+      view: 'timeGridWeek',
+    };
   }
 
   const handleError = (error) => {
@@ -34,8 +43,8 @@ let ec;
   // The boot sequence.
   const onBoot = () => {
     ec = new EventCalendar(document.getElementById('ec'), {
-      locale: eventCalendarLocale,
-      view: 'timeGridWeek',
+      locale: eventCalendarConfig.locale,
+      view: eventCalendarConfig.view,
       events: [],
       eventSources: [
         {
@@ -79,4 +88,4 @@ let ec;
   };
 
   document.addEventListener('DOMContentLoaded', onBoot);
-})(window.Joomla, document);
+})(window.Joomla, document, eventCalendarConfig);

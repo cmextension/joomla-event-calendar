@@ -9,6 +9,7 @@
 
 namespace CMExtension\Component\EventCalendar\Administrator\View\Calendar;
 
+use Joomla\CMS\Component\ComponentHelper;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
@@ -24,6 +25,15 @@ use Joomla\CMS\Toolbar\ToolbarHelper;
  */
 class HtmlView extends BaseHtmlView
 {
+    /**
+     * The page parameters.
+     *
+     * @var    \Joomla\Registry\Registry|null
+     *
+     * @since  0.0.2
+     */
+    protected $params = null;
+
     /**
      * The global application.
      *
@@ -47,6 +57,7 @@ class HtmlView extends BaseHtmlView
     public function display($tpl = null)
     {
         $this->app = Factory::getApplication();
+        $this->params = ComponentHelper::getParams('com_eventcalendar');
 
         $this->addToolbar();
 
