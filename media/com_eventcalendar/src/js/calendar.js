@@ -6,8 +6,6 @@ let ec;
     throw new Error('core.js was not properly initialised');
   }
 
-  console.log(eventCalendarConfig)
-
   if (!eventCalendarConfig) {
     eventCalendarConfig = {
       locale: 'en-GB',
@@ -72,7 +70,9 @@ let ec;
                   return;
                 }
 
-                successCallback(response.data);
+                ec.setOption('resources', response.data.resources);
+
+                successCallback(response.data.events);
               },
               onError: xhr => {
                 handleError(xhr);

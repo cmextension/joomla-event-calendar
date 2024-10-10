@@ -101,7 +101,9 @@ let ec;
                   return;
                 }
 
-                successCallback(response.data);
+                ec.setOption('resources', response.data.resources);
+
+                successCallback(response.data.events);
               },
               onError: xhr => {
                 handleError(xhr);

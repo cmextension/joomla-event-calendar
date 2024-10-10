@@ -46,14 +46,16 @@ class AjaxController extends BaseController
         $model = $this->getModel('Events', 'Administrator');
 
         $events = $model->getPublishedEvents($startTime, $endTime, $language);
+        $resources = [];
 
         if ($events) {
             foreach ($events as &$event) {
-                $event = EventHelper::convertToJSObject($event);
+                $event = EventHelper::convertToEventJSObject($event);
+                $resources[] = EventHelper::convertToResourceJSObject($event);
             }
         }
 
-        echo new JsonResponse($events);
+        echo new JsonResponse(['events' => $events, 'resources' => $resources]);
     }
 
     /**

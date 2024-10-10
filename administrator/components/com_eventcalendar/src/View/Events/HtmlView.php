@@ -171,9 +171,9 @@ class HtmlView extends BaseHtmlView
             }
 
             if (
-                $user->authorise('core.create', 'com_events')
-                && $user->authorise('core.edit', 'com_events')
-                && $user->authorise('core.edit.state', 'com_events')
+                $user->authorise('core.create', 'com_eventcalendar')
+                && $user->authorise('core.edit', 'com_eventcalendar')
+                && $user->authorise('core.edit.state', 'com_eventcalendar')
             ) {
                 $childBar->popupButton('batch', 'JTOOLBAR_BATCH')
                     ->popupType('inline')
@@ -185,8 +185,8 @@ class HtmlView extends BaseHtmlView
             }
         }
 
-        if ($user->authorise('core.admin', 'com_events') || $user->authorise('core.options', 'com_events')) {
-            $toolbar->preferences('com_events');
+        if ($user->authorise('core.admin', 'com_eventcalendar') || $user->authorise('core.options', 'com_eventcalendar')) {
+            $toolbar->preferences('com_eventcalendar');
         }
     }
 }

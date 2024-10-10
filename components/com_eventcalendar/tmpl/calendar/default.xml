@@ -19,7 +19,7 @@
                 default=""
                 label="COM_EVENTCALENDAR_CALENDAR_CALENDAR_VIEW"
             >
-                <option value="dayGridMonth">COM_EVENTCALENDAR_CALENDAR_CALENDAR_VIEW_DEFAULT</option>
+                <option value="">COM_EVENTCALENDAR_CALENDAR_CALENDAR_VIEW_DEFAULT</option>
                 <option value="dayGridMonth">dayGridMonth</option>
                 <option value="listDay">listDay</option>
                 <option value="listWeek">listWeek</option>
