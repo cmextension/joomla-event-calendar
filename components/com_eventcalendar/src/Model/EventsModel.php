@@ -48,7 +48,8 @@ class EventsModel extends BaseDatabaseModel
                 'language',
                 'state'
             ]))
-            ->from($db->quoteName('#__eventcalendar_events'));
+            ->from($db->quoteName('#__eventcalendar_events'))
+            ->where($db->quoteName('state') . ' = ' . $db->quote(1));
 
         if ($startTime) {
             $query->where($db->quoteName('start_time') . ' >= :startTime')
