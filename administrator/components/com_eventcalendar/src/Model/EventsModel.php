@@ -214,7 +214,7 @@ class EventsModel extends ListModel
     }
 
     /**
-     * Get published events based on start time, end time and language. Used in AJAX requests.
+     * Get events based on start time, end time and language. Used in AJAX requests.
      *
      * @param   string  $startTime
      * @param   string  $endTime
@@ -224,7 +224,7 @@ class EventsModel extends ListModel
      *
      * @since   0.0.2
      */
-    public function getPublishedEvents($startTime, $endTime, $language)
+    public function getEvents($startTime, $endTime, $language)
     {
         $db = $this->getDatabase();
         $query = $db->getQuery(true)

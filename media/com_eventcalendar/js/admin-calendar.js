@@ -5839,7 +5839,7 @@ let ec;
             const startTime = moment(fetchInfo.start).format('YYYY-MM-DD HH:mm:ss');
             const endTime = moment(fetchInfo.end).format('YYYY-MM-DD HH:mm:ss');
 
-            let url = 'index.php?option=com_eventcalendar&task=ajax.getPublishedEvents&format=json'
+            let url = 'index.php?option=com_eventcalendar&task=ajax.getEvents&format=json'
             url += '&start_time=' + startTime;
             url += '&end_time=' + endTime;
             url += '&' + Joomla.getOptions('csrf.token', '') + '=1';

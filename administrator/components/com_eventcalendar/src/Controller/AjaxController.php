@@ -32,7 +32,7 @@ class AjaxController extends BaseController
      *
      * @since   0.0.2
      */
-    public function getPublishedEvents()
+    public function getEvents()
     {
         if (!Session::checkToken('get')) {
             throw new \Exception(Text::_('JINVALID_TOKEN'), 403);
@@ -45,7 +45,7 @@ class AjaxController extends BaseController
         /** @var EventsModel $model */
         $model = $this->getModel('Events', 'Administrator');
 
-        $events = $model->getPublishedEvents($startTime, $endTime, $language);
+        $events = $model->getEvents($startTime, $endTime, $language);
         $resources = [];
 
         if ($events) {
