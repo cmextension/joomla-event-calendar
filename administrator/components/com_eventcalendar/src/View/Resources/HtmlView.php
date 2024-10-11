@@ -7,7 +7,7 @@
  * @license     GNU General Public License version 2 or later
  */
 
-namespace CMExtension\Component\EventCalendar\Administrator\View\Events;
+namespace CMExtension\Component\EventCalendar\Administrator\View\Resources;
 
 use Joomla\CMS\Form\Form;
 use Joomla\CMS\Language\Text;
@@ -16,16 +16,15 @@ use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
 use Joomla\CMS\Pagination\Pagination;
 use Joomla\CMS\Toolbar\Toolbar;
 use Joomla\CMS\Toolbar\ToolbarHelper;
-use CMExtension\Component\EventCalendar\Administrator\Model\EventsModel;
 use Joomla\CMS\Helper\ContentHelper;
 
 \defined('_JEXEC') or die;
 // phpcs:enable .Files.SideEffects
 
 /**
- * View class for a list of events.
+ * View class for a list of resources.
  *
- * @since  0.0.2
+ * @since  0.1.0
  */
 class HtmlView extends BaseHtmlView
 {
@@ -33,7 +32,7 @@ class HtmlView extends BaseHtmlView
      * An array of items.
      *
      * @var    array
-     * @since  0.0.2
+     * @since  0.1.0
      */
     protected $items;
 
@@ -41,7 +40,7 @@ class HtmlView extends BaseHtmlView
      * The model state.
      *
      * @var    Registry
-     * @since  0.0.2
+     * @since  0.1.0
      */
     protected $state;
 
@@ -49,7 +48,7 @@ class HtmlView extends BaseHtmlView
      * The pagination object.
      *
      * @var    Pagination
-     * @since  0.0.2
+     * @since  0.1.0
      */
     protected $pagination;
 
@@ -57,7 +56,7 @@ class HtmlView extends BaseHtmlView
      * Form object for search filters.
      *
      * @var    Form
-     * @since  0.0.2
+     * @since  0.1.0
      */
     public $filterForm;
 
@@ -84,13 +83,13 @@ class HtmlView extends BaseHtmlView
      *
      * @return  void
      *
-     * @since   0.0.2
+     * @since   0.1.0
      *
      * @throws  \Exception
      */
     public function display($tpl = null)
     {
-        /** @var EventsModel $model */
+        /** @var ResourcesModel $model */
         $model               = $this->getModel();
         $this->items         = $model->getItems();
         $this->state         = $model->getState();
@@ -118,7 +117,7 @@ class HtmlView extends BaseHtmlView
      *
      * @return  void
      *
-     * @since   0.0.2
+     * @since   0.1.0
      */
     protected function addToolbar()
     {
@@ -126,10 +125,10 @@ class HtmlView extends BaseHtmlView
         $user    = $this->getCurrentUser();
         $toolbar = Toolbar::getInstance();
 
-        ToolbarHelper::title(Text::_('COM_EVENTCALENDAR_MANAGER_EVENTS'), 'icon-calendar');
+        ToolbarHelper::title(Text::_('COM_EVENTCALENDAR_MANAGER_RESOURCES'), 'icon-file-alt');
 
         if ($canDo->get('core.create') || \count($user->getAuthorisedCategories('com_eventcalendar', 'core.create')) > 0) {
-            $toolbar->addNew('event.add');
+            $toolbar->addNew('resource.add');
         }
 
         if (!$this->isEmptyState && ($canDo->get('core.edit.state') || ($this->state->get('filter.published') == -2 && $canDo->get('core.delete')))) {
@@ -144,28 +143,28 @@ class HtmlView extends BaseHtmlView
 
             if ($canDo->get('core.edit.state')) {
                 if ($this->state->get('filter.published') != 2) {
-                    $childBar->publish('events.publish')->listCheck(true);
+                    $childBar->publish('resources.publish')->listCheck(true);
 
-                    $childBar->unpublish('events.unpublish')->listCheck(true);
+                    $childBar->unpublish('resources.unpublish')->listCheck(true);
                 }
 
                 if ($this->state->get('filter.published') != -1) {
                     if ($this->state->get('filter.published') != 2) {
-                        $childBar->archive('events.archive')->listCheck(true);
+                        $childBar->archive('resources.archive')->listCheck(true);
                     } elseif ($this->state->get('filter.published') == 2) {
-                        $childBar->publish('publish')->task('events.publish')->listCheck(true);
+                        $childBar->publish('publish')->task('resources.publish')->listCheck(true);
                     }
                 }
 
-                $childBar->checkin('events.checkin');
+                $childBar->checkin('resources.checkin');
 
                 if ($this->state->get('filter.published') != -2) {
-                    $childBar->trash('events.trash')->listCheck(true);
+                    $childBar->trash('resources.trash')->listCheck(true);
                 }
             }
 
             if ($this->state->get('filter.published') == -2 && $canDo->get('core.delete')) {
-                $toolbar->delete('events.delete', 'JTOOLBAR_EMPTY_TRASH')
+                $toolbar->delete('resources.delete', 'JTOOLBAR_EMPTY_TRASH')
                     ->message('JGLOBAL_CONFIRM_DELETE')
                     ->listCheck(true);
             }
@@ -177,7 +176,7 @@ class HtmlView extends BaseHtmlView
             ) {
                 $childBar->popupButton('batch', 'JTOOLBAR_BATCH')
                     ->popupType('inline')
-                    ->textHeader(Text::_('COM_EVENTCALENDAR_EVENT_BATCH_OPTIONS'))
+                    ->textHeader(Text::_('COM_EVENTCALENDAR_RESOURCE_BATCH_OPTIONS'))
                     ->url('#joomla-dialog-batch')
                     ->modalWidth('800px')
                     ->modalHeight('fit-content')

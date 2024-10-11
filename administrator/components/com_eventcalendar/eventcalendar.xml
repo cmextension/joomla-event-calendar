@@ -2,12 +2,12 @@
 <extension type="component" method="upgrade">
     <name>com_eventcalendar</name>
     <author>CMExtension</author>
-    <creationDate>2024-09</creationDate>
+    <creationDate>2024-10</creationDate>
     <copyright>(C) 2024 CMExtension</copyright>
     <license>GNU General Public License version 2 or later</license>
     <authorEmail>cmext.vn@gmail.com</authorEmail>
     <authorUrl>cmextension.com</authorUrl>
-    <version>0.0.2</version>
+    <version>0.1.0</version>
     <description>COM_EVENTCALENDAR_XML_DESCRIPTION</description>
     <namespace path="src">CMExtension\Component\EventCalendar</namespace>
     <media destination="com_eventcalendar" folder="media">
@@ -37,6 +37,7 @@
         <menu>COM_EVENTCALENDAR</menu>
         <submenu>
             <menu link="option=com_eventcalendar&amp;view=calendar" view="calendar">COM_EVENTCALENDAR_SUBMENU_CALENDAR</menu>
+            <menu link="option=com_eventcalendar&amp;view=resources" view="resources">COM_EVENTCALENDAR_SUBMENU_RESOURCES</menu>
             <menu link="option=com_eventcalendar&amp;view=events" view="events">COM_EVENTCALENDAR_SUBMENU_EVENTS</menu>
         </submenu>
         <files folder="admin">

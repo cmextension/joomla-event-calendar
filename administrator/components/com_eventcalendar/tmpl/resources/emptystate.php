@@ -11,18 +11,18 @@
 
 use Joomla\CMS\Layout\LayoutHelper;
 
-/** @var \CMExtension\Component\EventCalendar\Administrator\View\Events\HtmlView $this */
+/** @var \CMExtension\Component\EventCalendar\Administrator\View\Resources\HtmlView $this */
 
 $displayData = [
-    'textPrefix' => 'COM_EVENTCALENDAR_EVENTS',
-    'formURL'    => 'index.php?option=com_eventcalendar&view=events',
-    'icon'       => 'icon-calendar',
+    'textPrefix' => 'COM_EVENTCALENDAR_RESOURCES',
+    'formURL'    => 'index.php?option=com_eventcalendar&view=resources',
+    'icon'       => 'icon-file-alt',
 ];
 
 $user = $this->getCurrentUser();
 
 if ($user->authorise('core.create', 'com_eventcalendar')) {
-    $displayData['createURL'] = 'index.php?option=com_eventcalendar&task=event.add';
+    $displayData['createURL'] = 'index.php?option=com_eventcalendar&task=resource.add';
 }
 
 echo LayoutHelper::render('joomla.content.emptystate', $displayData);
