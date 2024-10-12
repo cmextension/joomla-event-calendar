@@ -10,6 +10,7 @@
 namespace CMExtension\Component\EventCalendar\Administrator\Controller;
 
 use Joomla\CMS\MVC\Controller\FormController;
+use Joomla\CMS\MVC\Model\BaseDatabaseModel;
 use Joomla\CMS\Router\Route;
 
 \defined('_JEXEC') or die;
@@ -89,6 +90,21 @@ class EventController extends FormController
      */
     protected function postSaveHook($model, $validData = [])
     {
+        /** @var EventModel $model */
+        $event = $model->getItem();
+
+        /** @var EventResourceModel $eventResourceModel */
+        $eventResourceModel = $this->getModel('EventResource', 'Administrator');
+        $eventResourceModel->deleteByEventId($event->id);
+
+        $resourceIds = $validData['resource_ids'] ?? [];
+
+        if ($resourceIds) {
+            foreach ($resourceIds as $resourceId) {
+                $eventResourceModel->save($event->id, $resourceId);
+            }
+        }
+
         if ($this->input->get('layout') === 'modal' && $this->task === 'save') {
             // When editing in modal then redirect to modalreturn layout.
             $id     = $model->getState('event.id', '');

@@ -50,4 +50,33 @@ class ResourceController extends FormController
 
         return parent::batch($model);
     }
+
+    /**
+     * Function that allows child controller access to model data
+     * after the data has been saved.
+     *
+     * @param   BaseDatabaseModel  $model      The data model object.
+     * @param   array              $validData  The validated data.
+     *
+     * @return  void
+     *
+     * @since   0.1.0
+     */
+    protected function postSaveHook($model, $validData = [])
+    {
+        /** @var ResourceModel $model */
+        $resource = $model->getItem();
+
+        /** @var EventResourceModel $eventResourceModel */
+        $eventResourceModel = $this->getModel('EventResource', 'Administrator');
+        $eventResourceModel->deleteByResourceId($resource->id);
+
+        $eventIds = $validData['event_ids'] ?? [];
+
+        if ($eventIds) {
+            foreach ($eventIds as $eventId) {
+                $eventResourceModel->save($eventId, $resource->id);
+            }
+        }
+    }
 }

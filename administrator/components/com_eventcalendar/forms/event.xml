@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form addfieldprefix="CMExtension\Component\EventCalendar\Administrator\Field">
-    <fieldset name="details">
-
+<form>
+    <fieldset name="details" addfieldprefix="CMExtension\Component\EventCalendar\Administrator\Field">
         <field
             name="id"
             type="text"
@@ -17,6 +16,15 @@
             label="COM_EVENTCALENDAR_FIELD_NAME_LABEL"
             required="true"
         />
+
+        <field
+            name="resource_ids"
+            type="resourcelist"
+            label="COM_EVENTCALENDAR_FIELD_RESOURCE_IDS_LABEL"
+            multiple="true"
+            layout="joomla.form.field.list-fancy-select"
+            >
+        </field>
 
         <field
             name="all_day"

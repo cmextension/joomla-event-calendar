@@ -39,6 +39,7 @@ $tmpl       = $tmpl ? '&tmpl=' . $tmpl : '';
             <div class="row">
                 <div class="col-12 col-md-6">
                     <?php echo $form->renderField('name'); ?>
+                    <?php echo $form->renderField('resource_ids'); ?>
                     <?php echo $form->renderField('start_time'); ?>
                     <?php echo $form->renderField('end_time'); ?>
                     <?php echo $form->renderField('all_day'); ?>

@@ -15,6 +15,7 @@ use Joomla\CMS\MVC\Model\AdminModel;
 use Joomla\CMS\Table\Table;
 use Joomla\CMS\Event\Model;
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\MVC\Model\BaseDatabaseModel;
 
 \defined('_JEXEC') or die;
 
@@ -273,5 +274,29 @@ class EventModel extends AdminModel
             ->where($db->quoteName('id') . ' = ' . $db->quote($id));
 
         $db->setQuery($query)->execute();
+    }
+
+    /**
+     * Method to get a single record.
+     *
+     * @param   integer  $pk  The id of the primary key.
+     *
+     * @return  \stdClass|false  Object on success, false on failure.
+     *
+     * @since   0.1.0
+     */
+    public function getItem($pk = null)
+    {
+        $item = parent::getItem($pk);
+
+        if (!$item) {
+            return $item;
+        }
+
+        /** @var EventResourceModel $eventResourceModel */
+        $eventResourceModel = BaseDatabaseModel::getInstance('EventResource', 'EventCalendarModel');
+        $item->resource_ids = $eventResourceModel->getResourceIdsByEventId($item->id);
+
+        return $item;
     }
 }

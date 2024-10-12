@@ -12,6 +12,7 @@ namespace CMExtension\Component\EventCalendar\Administrator\Model;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Form\Form;
 use Joomla\CMS\MVC\Model\AdminModel;
+use Joomla\CMS\MVC\Model\BaseDatabaseModel;
 use Joomla\CMS\Table\Table;
 
 \defined('_JEXEC') or die;
@@ -155,5 +156,29 @@ class ResourceModel extends AdminModel
         }
 
         return parent::save($data);
+    }
+
+    /**
+     * Method to get a single record.
+     *
+     * @param   integer  $pk  The id of the primary key.
+     *
+     * @return  \stdClass|false  Object on success, false on failure.
+     *
+     * @since   0.1.0
+     */
+    public function getItem($pk = null)
+    {
+        $item = parent::getItem($pk);
+
+        if (!$item) {
+            return $item;
+        }
+
+        /** @var EventResourceModel $eventResourceModel */
+        $eventResourceModel = BaseDatabaseModel::getInstance('EventResource', 'EventCalendarModel');
+        $item->event_ids = $eventResourceModel->getEventIdsByResourceId($item->id);
+
+        return $item;
     }
 }

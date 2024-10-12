@@ -19,6 +19,16 @@
         />
 
         <field
+            name="event_ids"
+            type="eventlist"
+            label="COM_EVENTCALENDAR_FIELD_EVENT_IDS_LABEL"
+            multiple="true"
+            layout="joomla.form.field.list-fancy-select"
+            >
+        </field>
+
+
+        <field
             name="state"
             type="list"
             label="JSTATUS"
