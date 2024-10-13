@@ -199,7 +199,7 @@ class ResourcesModel extends ListModel
      *
      * @since   0.1.0
      */
-    public function getPublishedResources($language)
+    public function getResources($language)
     {
         $db = $this->getDatabase();
         $query = $db->getQuery(true)

@@ -10,7 +10,6 @@
 namespace CMExtension\Component\EventCalendar\Administrator\Helper;
 
 use Joomla\CMS\Helper\ContentHelper;
-use stdClass;
 
 \defined('_JEXEC') or die;
 
@@ -37,7 +36,7 @@ class EventHelper
 
         $newObj                     = new \stdClass;
         $newObj->id                 = $event->id;
-        $newObj->resourceIds        = [$event->id];
+        $newObj->resourceIds        = $event->resource_ids;
         $newObj->allDay             = $event->all_day;
         $newObj->start              = $event->start_time;
         $newObj->end                = $event->end_time;
@@ -48,29 +47,6 @@ class EventHelper
         $newObj->textColor          = $event->text_color;
         $newObj->classNames         = $event->class_names;
         $newObj->styles             = $event->styles;
-
-        return $newObj;
-    }
-
-    /**
-     * Convert PHP object to vkurko/calendar's Resource object.
-     *
-     * @param   object  $event  Event PHP object
-     *
-     * @return  object  PHP object but with's JavaScript object properties
-     *
-     * @since   0.0.2
-     */
-    public static function convertToResourceJSObject($event)
-    {
-        $canDo = ContentHelper::getActions('com_eventcalendar');
-        $canEdit = $canDo->get('core.edit');
-
-        $newObj                         = new \stdClass;
-        $newObj->id                     = $event->id;
-        $newObj->title                  = $event->title;
-        $newObj->eventBackgroundColor   = $event->backgroundColor;
-        $newObj->eventTextColor         = $event->textColor;
 
         return $newObj;
     }

@@ -10,6 +10,7 @@
 namespace CMExtension\Component\EventCalendar\Administrator\Model;
 
 use Joomla\CMS\Component\ComponentHelper;
+use Joomla\CMS\MVC\Model\BaseDatabaseModel;
 use Joomla\CMS\MVC\Model\ListModel;
 use Joomla\CMS\Table\Table;
 use Joomla\Database\ParameterType;
@@ -264,6 +265,33 @@ class EventsModel extends ListModel
                 ->bind(':language2', $allLanguages);
         }
 
-        return $db->setQuery($query)->loadObjectList();
+        $events = $db->setQuery($query)->loadObjectList();
+
+        if ($events) {
+            $events = $this->__getResourceIds($events);
+        }
+
+        return $events;
+    }
+
+    /**
+     * Get resource IDs for the provided events.
+     *
+     * @param   array   $events     Array of events.
+     *
+     * @return  array   Array of events with resource IDs.
+     *
+     * @since   0.1.0
+     */
+    private function __getResourceIds($events)
+    {
+        /** @var EventCalendarModelEventResource $eventResourceModel */
+        $eventResourceModel = BaseDatabaseModel::getInstance('EventResource', 'EventCalendarModel');
+
+        foreach ($events as &$event) {
+            $event->resource_ids = $eventResourceModel->getResourceIdsByEventId($event->id);
+        }
+
+        return $events;
     }
 }

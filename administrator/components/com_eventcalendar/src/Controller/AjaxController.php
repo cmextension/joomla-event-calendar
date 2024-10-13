@@ -10,6 +10,7 @@
 namespace CMExtension\Component\EventCalendar\Administrator\Controller;
 
 use CMExtension\Component\EventCalendar\Administrator\Helper\EventHelper;
+use CMExtension\Component\EventCalendar\Administrator\Helper\ResourceHelper;
 use Joomla\CMS\Factory;
 use Joomla\CMS\MVC\Controller\BaseController;
 use Joomla\CMS\Response\JsonResponse;
@@ -42,20 +43,32 @@ class AjaxController extends BaseController
         $endTime = $this->input->getString('end_time');
         $language = $this->input->getString('language', Factory::getApplication()->getLanguage()->getTag());
 
-        /** @var EventsModel $model */
-        $model = $this->getModel('Events', 'Administrator');
+        /** @var EventsModel $eventsModel */
+        $eventsModel = $this->getModel('Events', 'Administrator');
 
-        $events = $model->getEvents($startTime, $endTime, $language);
-        $resources = [];
+        $events = $eventsModel->getEvents($startTime, $endTime, $language);
 
         if ($events) {
             foreach ($events as &$event) {
                 $event = EventHelper::convertToEventJSObject($event);
-                $resources[] = EventHelper::convertToResourceJSObject($event);
             }
         }
 
-        echo new JsonResponse(['events' => $events, 'resources' => $resources]);
+        /** @var ResourcesModel $resourcesModel */
+        $resourcesModel = $this->getModel('Resources', 'Administrator');
+
+        $resources = $resourcesModel->getResources($language);
+
+        if ($resources) {
+            foreach ($resources as &$resource) {
+                $resource = ResourceHelper::convertToResourceJSObject($resource);
+            }
+        }
+
+        echo new JsonResponse([
+            'events'    => $events,
+            'resources' => $resources
+        ]);
     }
 
     /**
