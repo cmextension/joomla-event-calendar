@@ -9,6 +9,7 @@
 
 namespace CMExtension\Component\EventCalendar\Site\Model;
 
+use Joomla\CMS\Factory;
 use Joomla\CMS\MVC\Model\BaseDatabaseModel;
 
 \defined('_JEXEC') or die;
@@ -72,6 +73,20 @@ class EventsModel extends BaseDatabaseModel
                 ->bind(':language2', $allLanguages);
         }
 
-        return $db->setQuery($query)->loadObjectList();
+        $events = $db->setQuery($query)->loadObjectList();
+
+        if ($events) {
+            /** @var CMSApplication $app */
+            $app = Factory::getApplication();
+
+            /** @var EventCalendarModelEventResource $eventResourceModel */
+            $eventResourceModel = $app->bootComponent('com_eventcalendar')->getMVCFactory()->createModel('EventResource', 'Administrator');
+
+            foreach ($events as &$event) {
+                $event->resource_ids = $eventResourceModel->getResourceIdsByEventId($event->id);
+            }
+        }
+
+        return $events;
     }
 }

@@ -16,12 +16,22 @@ use Joomla\CMS\Session\Session;
 
 /** @var HtmlView $this */
 
+$params = $this->params;
+
 $eventCalendarLocale = $this->app->getLanguage()->getTag();
-$eventCalendarView = $this->params->get('default_calendar_view', 'timeGridWeek');
+$eventCalendarView = $params->get('default_backend_view', 'timeGridWeek');
+$toolbarStart = $params->get('default_backend_toolbar_start', '');
+$toolbarCenter = $params->get('default_backend_toolbar_center', '');
+$toolbarEnd = $params->get('default_backend_toolbar_end', '');
 
 $eventCalendarConfig = [
     'locale'    => $eventCalendarLocale,
     'view'      => $eventCalendarView,
+    'headerToolbar' => [
+        'start'     => $toolbarStart,
+        'center'    => $toolbarCenter,
+        'end'       => $toolbarEnd,
+    ]
 ];
 
 /** @var Joomla\CMS\WebAsset\WebAssetManager $wa */

@@ -5832,6 +5832,11 @@ let ec;
     ec = new EventCalendar(document.getElementById('ec'), {
       locale: eventCalendarConfig.locale,
       view: eventCalendarConfig.view,
+      headerToolbar: {
+        start: eventCalendarConfig.headerToolbar.start,
+        center: eventCalendarConfig.headerToolbar.center,
+        end: eventCalendarConfig.headerToolbar.end
+      },
       events: [],
       eventSources: [
         {

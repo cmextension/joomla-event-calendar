@@ -9,15 +9,26 @@
 
 \defined('_JEXEC') or die;
 
-$eventCalendarLocale = $this->app->getLanguage()->getTag();
-$defaultCalendarView = $this->params->get('default_calendar_view', 'timeGridWeek');
-$eventCalendarView = $this->app->getParams()->get('calendar_view', $defaultCalendarView);
+$app = $this->app;
+$params = $this->params;
+
+$eventCalendarLocale = $app->getLanguage()->getTag();
+$defaultCalendarView = $params->get('default_frontend_view', 'timeGridWeek');
+$eventCalendarView = $app->getParams()->get('calendar_view', $defaultCalendarView);
+
+$toolbarStart = $params->get('default_frontend_toolbar_start', '');
+$toolbarCenter = $params->get('default_frontend_toolbar_center', '');
+$toolbarEnd = $params->get('default_frontend_toolbar_end', '');
 
 $eventCalendarConfig = [
     'locale'    => $eventCalendarLocale,
     'view'      => $eventCalendarView,
+    'headerToolbar' => [
+        'start'     => $toolbarStart,
+        'center'    => $toolbarCenter,
+        'end'       => $toolbarEnd,
+    ]
 ];
-
 /** @var Joomla\CMS\WebAsset\WebAssetManager $wa */
 $wa = $this->document->getWebAssetManager();
 $wa->useScript('keepalive')

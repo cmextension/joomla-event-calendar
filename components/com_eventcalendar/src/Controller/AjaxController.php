@@ -10,6 +10,7 @@
 namespace CMExtension\Component\EventCalendar\Site\Controller;
 
 use CMExtension\Component\EventCalendar\Administrator\Helper\EventHelper;
+use CMExtension\Component\EventCalendar\Administrator\Helper\ResourceHelper;
 use Joomla\CMS\Factory;
 use Joomla\CMS\MVC\Controller\BaseController;
 use Joomla\CMS\Response\JsonResponse;
@@ -42,16 +43,25 @@ class AjaxController extends BaseController
         $endTime = $this->input->getString('end_time');
         $language = $this->input->getString('language', Factory::getApplication()->getLanguage()->getTag());
 
-        /** @var EventsModel $model */
-        $model = $this->getModel('Events', 'Site');
+        /** @var EventsModel $eventsModel */
+        $eventsModel = $this->getModel('Events', 'Site');
 
-        $events = $model->getPublishedEvents($startTime, $endTime, $language);
-        $resources = [];
+        $events = $eventsModel->getPublishedEvents($startTime, $endTime, $language);
 
         if ($events) {
             foreach ($events as &$event) {
                 $event = EventHelper::convertToEventJSObject($event);
-                $resources[] = EventHelper::convertToResourceJSObject($event);
+            }
+        }
+
+        /** @var ResourcesModel $resourcesModel */
+        $resourcesModel = $this->getModel('Resources', 'Site');
+
+        $resources = $resourcesModel->getPublishedResources($language);
+
+        if ($resources) {
+            foreach ($resources as &$resource) {
+                $resource = ResourceHelper::convertToResourceJSObject($resource);
             }
         }
 

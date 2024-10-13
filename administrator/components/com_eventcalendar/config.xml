@@ -2,15 +2,86 @@
 <config>
     <fieldset
         name="general"
-        label="COM_EVENTCALENDAR_CONFIG_FIELDSET_CALENDAR"
+        label="COM_EVENTCALENDAR_CONFIG_FIELDSET_TOOLBAR"
+         addfieldprefix="CMExtension\Component\EventCalendar\Administrator\Field"
     >
         <field
-            name="default_calendar_view"
+            name="toolbar_help"
+            type="toolbarhelp"
+            hiddenLabel="true" />
+
+        <field
+            name="frontend_heading"
+            type="note"
+            label="COM_EVENTCALENDAR_CONFIG_FRONT_END_TOOLBAR" />>
+
+        <field
+            name="default_frontend_toolbar_start"
+            type="text"
+            label="COM_EVENTCALENDAR_CONFIG_FIELD_TOOLBAR_START" />
+
+        <field
+            name="default_frontend_toolbar_center"
+            type="text"
+            label="COM_EVENTCALENDAR_CONFIG_FIELD_TOOLBAR_CENTER" />
+
+        <field
+            name="default_frontend_toolbar_end"
+            type="text"
+            label="COM_EVENTCALENDAR_CONFIG_FIELD_TOOLBAR_END" />
+
+            <field
+            name="backend_heading"
+            type="note"
+            label="COM_EVENTCALENDAR_CONFIG_BACK_END_TOOLBAR" />>
+
+        <field
+            name="default_backend_toolbar_start"
+            type="text"
+            label="COM_EVENTCALENDAR_CONFIG_FIELD_TOOLBAR_START" />
+
+        <field
+            name="default_backend_toolbar_center"
+            type="text"
+            label="COM_EVENTCALENDAR_CONFIG_FIELD_TOOLBAR_CENTER" />
+
+        <field
+            name="default_backend_toolbar_end"
+            type="text"
+            label="COM_EVENTCALENDAR_CONFIG_FIELD_TOOLBAR_END" />
+    </fieldset>
+
+    <fieldset
+        name="view"
+        label="COM_EVENTCALENDAR_CONFIG_FIELDSET_VIEW"
+    >
+        <field
+            name="default_frontend_view"
             type="list"
-            layout="joomla.form.field.list-fancy-select"
-            validate="options"
+            label="COM_EVENTCALENDAR_CONFIG_FIELD_DEFAULT_FRONTEND_VIEW"
             default="timeGridWeek"
-            label="COM_EVENTCALENDAR_CONFIG_FIELD_DEFAULT_CALENDAR_VIEW"
+            validate="options"
+        >
+            <option value="dayGridMonth">dayGridMonth</option>
+            <option value="listDay">listDay</option>
+            <option value="listWeek">listWeek</option>
+            <option value="listMonth">listMonth</option>
+            <option value="listYear">listYear</option>
+            <option value="resourceTimeGridDay">resourceTimeGridDay</option>
+            <option value="resourceTimeGridWeek">resourceTimeGridWeek</option>
+            <option value="resourceTimelineDay">resourceTimelineDay</option>
+            <option value="resourceTimelineWeek">resourceTimelineWeek</option>
+            <option value="resourceTimelineMonth">resourceTimelineMonth</option>
+            <option value="timeGridDay">timeGridDay</option>
+            <option value="timeGridWeek">timeGridWeek</option>
+        </field>
+
+        <field
+            name="default_backend_view"
+            type="list"
+            label="COM_EVENTCALENDAR_CONFIG_FIELD_DEFAULT_BACKEND_VIEW"
+            default="timeGridWeek"
+            validate="options"
         >
             <option value="dayGridMonth">dayGridMonth</option>
             <option value="listDay">listDay</option>
