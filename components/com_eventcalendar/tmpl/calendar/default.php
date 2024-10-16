@@ -7,6 +7,8 @@
  * @license     GNU General Public License version 2 or later
  */
 
+use Joomla\CMS\Language\Text;
+
 \defined('_JEXEC') or die;
 
 $app = $this->app;
@@ -30,8 +32,25 @@ $eventCalendarConfig = [
         'start'     => $toolbarStart,
         'center'    => $toolbarCenter,
         'end'       => $toolbarEnd,
+    ],
+    'buttonText'    => [
+        'close'                 => Text::_('COM_EVENTCALENDAR_CALENDAR_BUTTON_CLOSE'),
+        'dayGridMonth'          => Text::_('COM_EVENTCALENDAR_CALENDAR_BUTTON_DAYGRIDMONTH'),
+        'listDay'               => Text::_('COM_EVENTCALENDAR_CALENDAR_BUTTON_LISTDAY'),
+        'listMonth'             => Text::_('COM_EVENTCALENDAR_CALENDAR_BUTTON_LISTMONTH'),
+        'listWeek'              => Text::_('COM_EVENTCALENDAR_CALENDAR_BUTTON_LISTWEEK'),
+        'listYear'              => Text::_('COM_EVENTCALENDAR_CALENDAR_BUTTON_LISTYEAR'),
+        'resourceTimeGridDay'   => Text::_('COM_EVENTCALENDAR_CALENDAR_BUTTON_RESOURCETIMEGRIDDAY'),
+        'resourceTimeGridWeek'  => Text::_('COM_EVENTCALENDAR_CALENDAR_BUTTON_RESOURCETIMEGRIDWEEK'),
+        'resourceTimelineDay'   => Text::_('COM_EVENTCALENDAR_CALENDAR_BUTTON_RESOURCETIMELINEDAY'),
+        'resourceTimelineMonth' => Text::_('COM_EVENTCALENDAR_CALENDAR_BUTTON_RESOURCETIMELINEMONTH'),
+        'resourceTimelineWeek'  => Text::_('COM_EVENTCALENDAR_CALENDAR_BUTTON_RESOURCETIMELINEWEEK'),
+        'timeGridDay'           => Text::_('COM_EVENTCALENDAR_CALENDAR_BUTTON_TIMEGRIDAY'),
+        'timeGridWeek'          => Text::_('COM_EVENTCALENDAR_CALENDAR_BUTTON_TIMEGRIDWEEK'),
+        'today'                 => Text::_('COM_EVENTCALENDAR_CALENDAR_BUTTON_TODAY'),
     ]
 ];
+
 /** @var Joomla\CMS\WebAsset\WebAssetManager $wa */
 $wa = $this->document->getWebAssetManager();
 $wa->useScript('keepalive')

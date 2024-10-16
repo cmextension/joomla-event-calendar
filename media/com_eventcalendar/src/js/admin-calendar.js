@@ -6,7 +6,7 @@ let ec;
     throw new Error('core.js was not properly initialised');
   }
 
-  if (typeof(eventCalendarConfig) == 'undefined') {
+  if (typeof eventCalendarConfig === 'undefined') {
     eventCalendarConfig = {
       linkTarget: '_self',
       locale: 'en-GB',
@@ -16,6 +16,22 @@ let ec;
         center: '',
         end: ''
       },
+      buttonText: {
+        close: 'Close',
+        dayGridMonth: 'month',
+        listDay: 'list',
+        listMonth: 'list',
+        listWeek: 'list',
+        listYear: 'list',
+        resourceTimeGridDay: 'resources',
+        resourceTimeGridWeek: 'resources',
+        resourceTimelineDay: 'timeline',
+        resourceTimelineMonth: 'timeline',
+        resourceTimelineWeek: 'timeline',
+        timeGridDay: 'day',
+        timeGridWeek: 'week',
+        today: 'today'
+      }
     };
   }
 
@@ -85,6 +101,7 @@ let ec;
         center: eventCalendarConfig.headerToolbar.center,
         end: eventCalendarConfig.headerToolbar.end
       },
+      buttonText: eventCalendarConfig.buttonText,
       events: [],
       eventSources: [
         {
