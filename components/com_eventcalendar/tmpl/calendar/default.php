@@ -12,6 +12,8 @@
 $app = $this->app;
 $params = $this->params;
 
+$linkTarget = $params->get('event_link_target', '_self');
+
 $eventCalendarLocale = $app->getLanguage()->getTag();
 $defaultCalendarView = $params->get('default_frontend_view', 'timeGridWeek');
 $eventCalendarView = $app->getParams()->get('calendar_view', $defaultCalendarView);
@@ -21,8 +23,9 @@ $toolbarCenter = $params->get('default_frontend_toolbar_center', '');
 $toolbarEnd = $params->get('default_frontend_toolbar_end', '');
 
 $eventCalendarConfig = [
-    'locale'    => $eventCalendarLocale,
-    'view'      => $eventCalendarView,
+    'link_target'   => $linkTarget,
+    'locale'        => $eventCalendarLocale,
+    'view'          => $eventCalendarView,
     'headerToolbar' => [
         'start'     => $toolbarStart,
         'center'    => $toolbarCenter,

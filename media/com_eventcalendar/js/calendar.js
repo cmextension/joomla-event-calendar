@@ -5764,10 +5764,16 @@ let ec;
     throw new Error('core.js was not properly initialised');
   }
 
-  if (!eventCalendarConfig) {
+  if (typeof(eventCalendarConfig) == 'undefined') {
     eventCalendarConfig = {
+      linkTarget: '_self',
       locale: 'en-GB',
       view: 'timeGridWeek',
+      headerToolbar: {
+        start: '',
+        center: '',
+        end: ''
+      },
     };
   }
 
@@ -5807,11 +5813,16 @@ let ec;
         end: eventCalendarConfig.headerToolbar.end
       },
       events: [],
+      eventClick: function(info) {
+        if (info.event.extendedProps.url) {
+          window.open(info.event.extendedProps.url, eventCalendarConfig.linkTarget);
+        }
+      },
       eventSources: [
         {
-          events: function(fetchInfo, successCallback, failureCallback) {
-            const startTime = moment(fetchInfo.start).format('YYYY-MM-DD HH:mm:ss');
-            const endTime = moment(fetchInfo.end).format('YYYY-MM-DD HH:mm:ss');
+          events: function(info, successCallback, failureCallback) {
+            const startTime = moment(info.start).format('YYYY-MM-DD HH:mm:ss');
+            const endTime = moment(info.end).format('YYYY-MM-DD HH:mm:ss');
 
             let url = '/index.php?option=com_eventcalendar&task=ajax.getPublishedEvents&format=json'
             url += '&start_time=' + startTime;

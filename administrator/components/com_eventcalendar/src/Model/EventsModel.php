@@ -239,6 +239,9 @@ class EventsModel extends ListModel
                 'text_color',
                 'class_names',
                 'styles',
+                'link_type',
+                'menu_item_id',
+                'url',
                 'language',
                 'state'
             ]))

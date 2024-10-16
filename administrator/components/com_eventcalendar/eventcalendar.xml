@@ -7,7 +7,7 @@
     <license>GNU General Public License version 2 or later</license>
     <authorEmail>cmext.vn@gmail.com</authorEmail>
     <authorUrl>cmextension.com</authorUrl>
-    <version>0.1.0</version>
+    <version>0.2.0</version>
     <description>COM_EVENTCALENDAR_XML_DESCRIPTION</description>
     <namespace path="src">CMExtension\Component\EventCalendar</namespace>
     <media destination="com_eventcalendar" folder="media">

@@ -6,10 +6,16 @@ let ec;
     throw new Error('core.js was not properly initialised');
   }
 
-  if (!eventCalendarConfig) {
+  if (typeof(eventCalendarConfig) == 'undefined') {
     eventCalendarConfig = {
+      linkTarget: '_self',
       locale: 'en-GB',
       view: 'timeGridWeek',
+      headerToolbar: {
+        start: '',
+        center: '',
+        end: ''
+      },
     };
   }
 
@@ -82,9 +88,9 @@ let ec;
       events: [],
       eventSources: [
         {
-          events: function(fetchInfo, successCallback, failureCallback) {
-            const startTime = moment(fetchInfo.start).format('YYYY-MM-DD HH:mm:ss');
-            const endTime = moment(fetchInfo.end).format('YYYY-MM-DD HH:mm:ss');
+          events: function(info, successCallback, failureCallback) {
+            const startTime = moment(info.start).format('YYYY-MM-DD HH:mm:ss');
+            const endTime = moment(info.end).format('YYYY-MM-DD HH:mm:ss');
 
             let url = 'index.php?option=com_eventcalendar&task=ajax.getEvents&format=json'
             url += '&start_time=' + startTime;
@@ -117,28 +123,28 @@ let ec;
           }
         },
       ],
-      eventDrop: (fetchInfo) => {
-        onEventChange(fetchInfo.event);
+      eventDrop: (info) => {
+        onEventChange(info.event);
       },
-      eventResize: (fetchInfo) => {
-        onEventChange(fetchInfo.event);
+      eventResize: (info) => {
+        onEventChange(info.event);
       },
-      eventContent: (fetchInfo) => {
+      eventContent: (info) => {
         const config = {
           popupType: 'iframe',
-          src: 'index.php?option=com_eventcalendar&view=event&layout=modal&tmpl=component&id=' + fetchInfo.event.id,
-          textHeader: fetchInfo.event.title
+          src: 'index.php?option=com_eventcalendar&view=event&layout=modal&tmpl=component&id=' + info.event.id,
+          textHeader: info.event.title
         };
 
-        let startDate = new Date(fetchInfo.event.start);
+        let startDate = new Date(info.event.start);
 
         let html = '';
 
-        if (!fetchInfo.event.allDay) {
-          html += '<time class="ec-event-time" datetime="' + startDate.toISOString() + '" data-joomla-dialog="' + htmlspecialchars(JSON.stringify(config)) + '">' + fetchInfo.timeText + '</time>';
+        if (!info.event.allDay) {
+          html += '<time class="ec-event-time" datetime="' + startDate.toISOString() + '" data-joomla-dialog="' + htmlspecialchars(JSON.stringify(config)) + '">' + info.timeText + '</time>';
         }
 
-        html += '<h4 class="ec-event-title" data-joomla-dialog="' + htmlspecialchars(JSON.stringify(config)) + '">' + fetchInfo.event.title + '</h4>';
+        html += '<h4 class="ec-event-title" data-joomla-dialog="' + htmlspecialchars(JSON.stringify(config)) + '">' + info.event.title + '</h4>';
 
         return { html: html };
       }

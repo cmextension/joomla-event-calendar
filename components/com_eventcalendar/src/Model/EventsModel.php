@@ -45,6 +45,9 @@ class EventsModel extends BaseDatabaseModel
                 'background_color',
                 'text_color',
                 'class_names',
+                'link_type',
+                'menu_item_id',
+                'url',
                 'styles',
                 'language',
                 'state'

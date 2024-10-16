@@ -43,6 +43,9 @@ $tmpl       = $tmpl ? '&tmpl=' . $tmpl : '';
                     <?php echo $form->renderField('start_time'); ?>
                     <?php echo $form->renderField('end_time'); ?>
                     <?php echo $form->renderField('all_day'); ?>
+                    <?php echo $form->renderField('link_type'); ?>
+                    <?php echo $form->renderField('menu_item_id'); ?>
+                    <?php echo $form->renderField('url'); ?>
                     <?php echo $form->renderField('language'); ?>
                     <?php echo $form->renderField('state'); ?>
                 </div>

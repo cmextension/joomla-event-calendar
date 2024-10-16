@@ -99,10 +99,25 @@
     </fieldset>
 
     <fieldset
+        name="event"
+        label="COM_EVENTCALENDAR_CONFIG_FIELDSET_EVENT"
+    >
+        <field
+            name="event_link_target"
+            type="radio"
+            label="COM_EVENTCALENDAR_CONFIG_FIELD_EVENT_LINK_TARGET"
+            default="_self"
+            validate="options"
+        >
+            <option value="_self">COM_EVENTCALENDAR_CONFIG_FIELD_EVENT_LINK_TARGET_SELF</option>
+            <option value="_blank">COM_EVENTCALENDAR_CONFIG_FIELD_EVENT_LINK_TARGET_BLANK</option>
+        </field>
+    </fieldset>
+
+    <fieldset
         name="permissions"
         label="JCONFIG_PERMISSIONS_LABEL"
     >
-
         <field
             name="rules"
             type="rules"
@@ -112,6 +127,5 @@
             component="com_eventcalendar"
             section="component"
         />
-
     </fieldset>
 </config>

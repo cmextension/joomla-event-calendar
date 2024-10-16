@@ -48,6 +48,32 @@
         />
 
         <field
+            name="link_type"
+            type="radio"
+            label="COM_EVENTCALENDAR_FIELD_LINK_TYPE_LABEL"
+            default=""
+            >
+            <option value="">JDISABLED</option>
+            <option value="menu_item">COM_EVENTCALENDAR_LINK_MENU_ITEM</option>
+            <option value="url">COM_EVENTCALENDAR_LINK_URL</option>
+        </field>
+
+        <field
+            name="menu_item_id"
+            type="menuitem"
+            label="COM_EVENTCALENDAR_FIELD_MENU_ITEM_ID_LABEL"
+            layout="joomla.form.field.groupedlist-fancy-select"
+            showon="link_type:menu_item"
+        />
+
+        <field
+            name="url"
+            type="text"
+            label="COM_EVENTCALENDAR_FIELD_URL_LABEL"
+            showon="link_type:url"
+        />
+
+        <field
             name="end_time"
             type="calendar"
             label="COM_EVENTCALENDAR_FIELD_END_TIME_LABEL"

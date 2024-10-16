@@ -10,6 +10,7 @@
 namespace CMExtension\Component\EventCalendar\Administrator\Helper;
 
 use Joomla\CMS\Helper\ContentHelper;
+use Joomla\CMS\Router\Route;
 
 \defined('_JEXEC') or die;
 
@@ -34,6 +35,17 @@ class EventHelper
         $canDo = ContentHelper::getActions('com_eventcalendar');
         $canEdit = $canDo->get('core.edit');
 
+        if ($event->link_type == 'menu_item') {
+            $url = Route::_('index.php?Itemid=' . $event->menu_item_id);
+        } elseif ($event->link_type == 'url') {
+            $url = $event->url;
+        } else {
+            $url = null;
+        }
+
+        $extendedProps = new \stdClass;
+        $extendedProps->url = $url;
+
         $newObj                     = new \stdClass;
         $newObj->id                 = $event->id;
         $newObj->resourceIds        = $event->resource_ids;
@@ -47,6 +59,7 @@ class EventHelper
         $newObj->textColor          = $event->text_color;
         $newObj->classNames         = $event->class_names;
         $newObj->styles             = $event->styles;
+        $newObj->extendedProps      = $extendedProps;
 
         return $newObj;
     }
