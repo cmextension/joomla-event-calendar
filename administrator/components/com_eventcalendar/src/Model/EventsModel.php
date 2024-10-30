@@ -86,6 +86,8 @@ class EventsModel extends ListModel
                     $db->quoteName('a.all_day'),
                     $db->quoteName('a.state'),
                     $db->quoteName('a.language'),
+                    $db->quoteName('a.checked_out'),
+                    $db->quoteName('a.checked_out_time'),
                 ]
             )
         )

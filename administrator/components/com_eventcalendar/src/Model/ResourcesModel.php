@@ -76,6 +76,8 @@ class ResourcesModel extends ListModel
                     $db->quoteName('a.name'),
                     $db->quoteName('a.state'),
                     $db->quoteName('a.language'),
+                    $db->quoteName('a.checked_out'),
+                    $db->quoteName('a.checked_out_time'),
                 ]
             )
         )
