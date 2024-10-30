@@ -14,6 +14,7 @@ use Joomla\CMS\Form\Form;
 use Joomla\CMS\MVC\Model\AdminModel;
 use Joomla\CMS\MVC\Model\BaseDatabaseModel;
 use Joomla\CMS\Table\Table;
+use Joomla\Utilities\ArrayHelper;
 
 \defined('_JEXEC') or die;
 
@@ -54,8 +55,15 @@ class ResourceModel extends AdminModel
      */
     public function getForm($data = [], $loadData = true)
     {
+        // Load the data later.
+        $loadData = false;
+
+        $options = ['control' => 'jform', 'load_data' => $loadData];
+        $name = 'com_eventcalendar.event';
+        $source = 'event';
+
         // Get the form.
-        $form = $this->loadForm('com_eventcalendar.resource', 'resource', ['control' => 'jform', 'load_data' => $loadData]);
+        $form = $this->loadForm($name, $source, $options);
 
         if (empty($form)) {
             return false;
@@ -87,6 +95,22 @@ class ResourceModel extends AdminModel
             $form->setFieldAttribute('created_by', 'filter', 'unset');
         }
 
+        // Load the data and run preprocessForm again to allow the plugins to modify the form.,
+        // but this time the plugin group is "eventcalendar" instead of "content".
+        $data = $this->loadFormData();
+        $this->preprocessForm($form, $data, 'eventcalendar');
+        $form->bind($data);
+
+        // Store the form for later use again.
+        $options['control'] = ArrayHelper::getValue((array) $options, 'control', false);
+
+        $sigOptions = $options;
+        unset($sigOptions['load_data']);
+
+        $hash = md5($source . serialize($sigOptions));
+
+        $this->_forms[$hash] = $form;
+
         return $form;
     }
 
@@ -108,7 +132,7 @@ class ResourceModel extends AdminModel
             $data = $this->getItem();
         }
 
-        $this->preprocessData('com_eventcalendar.resource', $data);
+        $this->preprocessData('com_eventcalendar.resource', $data, 'eventcalendar');
 
         return $data;
     }

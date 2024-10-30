@@ -15,7 +15,7 @@ use Joomla\CMS\MVC\Model\AdminModel;
 use Joomla\CMS\Table\Table;
 use Joomla\CMS\Event\Model;
 use Joomla\CMS\Language\Text;
-use Joomla\CMS\MVC\Model\BaseDatabaseModel;
+use Joomla\Utilities\ArrayHelper;
 
 \defined('_JEXEC') or die;
 
@@ -58,8 +58,15 @@ class EventModel extends AdminModel
      */
     public function getForm($data = [], $loadData = true)
     {
+        // Load the data later.
+        $loadData = false;
+
+        $options = ['control' => 'jform', 'load_data' => $loadData];
+        $name = 'com_eventcalendar.event';
+        $source = 'event';
+
         // Get the form.
-        $form = $this->loadForm('com_eventcalendar.event', 'event', ['control' => 'jform', 'load_data' => $loadData]);
+        $form = $this->loadForm($name, $source, $options);
 
         if (empty($form)) {
             return false;
@@ -95,6 +102,22 @@ class EventModel extends AdminModel
             $form->setFieldAttribute('created_by', 'filter', 'unset');
         }
 
+        // Load the data and run preprocessForm again to allow the plugins to modify the form.,
+        // but this time the plugin group is "eventcalendar" instead of "content".
+        $data = $this->loadFormData();
+        $this->preprocessForm($form, $data, 'eventcalendar');
+        $form->bind($data);
+
+        // Store the form for later use again.
+        $options['control'] = ArrayHelper::getValue((array) $options, 'control', false);
+
+        $sigOptions = $options;
+        unset($sigOptions['load_data']);
+
+        $hash = md5($source . serialize($sigOptions));
+
+        $this->_forms[$hash] = $form;
+
         return $form;
     }
 
@@ -116,7 +139,7 @@ class EventModel extends AdminModel
             $data = $this->getItem();
         }
 
-        $this->preprocessData('com_eventcalendar.event', $data);
+        $this->preprocessData('com_eventcalendar.event', $data, 'eventcalendar');
 
         return $data;
     }
@@ -294,7 +317,7 @@ class EventModel extends AdminModel
         }
 
         /** @var EventResourceModel $eventResourceModel */
-        $eventResourceModel = BaseDatabaseModel::getInstance('EventResource', 'EventCalendarModel');
+        $eventResourceModel = $this->getMVCFactory()->createModel('EventResource', 'Administrator', ['ignore_request' => true]);
         $item->resource_ids = $eventResourceModel->getResourceIdsByEventId($item->id);
 
         return $item;
