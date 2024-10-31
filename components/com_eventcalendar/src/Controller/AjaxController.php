@@ -11,11 +11,15 @@ namespace CMExtension\Component\EventCalendar\Site\Controller;
 
 use CMExtension\Component\EventCalendar\Administrator\Helper\EventHelper;
 use CMExtension\Component\EventCalendar\Administrator\Helper\ResourceHelper;
+use CMExtension\Component\EventCalendar\Site\Event\PrepareCalendarEventEvent;
+use CMExtension\Component\EventCalendar\Site\Event\PrepareCalendarResourceEvent;
 use Joomla\CMS\Factory;
 use Joomla\CMS\MVC\Controller\BaseController;
 use Joomla\CMS\Response\JsonResponse;
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Plugin\PluginHelper;
 use Joomla\CMS\Session\Session;
+use Joomla\Event\DispatcherInterface;
 
 \defined('_JEXEC') or die;
 
@@ -43,6 +47,10 @@ class AjaxController extends BaseController
         $endTime = $this->input->getString('end_time');
         $language = $this->input->getString('language', Factory::getApplication()->getLanguage()->getTag());
 
+        $dispatcher = Factory::getContainer()->get(DispatcherInterface::class);
+
+        PluginHelper::importPlugin('eventcalendar', null, true, $dispatcher);
+
         /** @var EventsModel $eventsModel */
         $eventsModel = $this->getModel('Events', 'Site');
 
@@ -51,6 +59,11 @@ class AjaxController extends BaseController
         if ($events) {
             foreach ($events as &$event) {
                 $event = EventHelper::convertToEventJSObject($event);
+
+                $dispatcher->dispatch(
+                    'onEventCalendarPrepareEvent',
+                    new PrepareCalendarEventEvent('onEventCalendarPrepareEvent', ['subject' => $event])
+                );
             }
         }
 
@@ -62,6 +75,11 @@ class AjaxController extends BaseController
         if ($resources) {
             foreach ($resources as &$resource) {
                 $resource = ResourceHelper::convertToResourceJSObject($resource);
+
+                $dispatcher->dispatch(
+                    'onEventCalendarPrepareResource',
+                    new PrepareCalendarResourceEvent('onEventCalendarPrepareResource', ['subject' => $resource])
+                );
             }
         }
 
