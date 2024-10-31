@@ -4,6 +4,7 @@
 !/administrator/components/com_eventcalendar/**
 !/components/com_eventcalendar/**
 !/media/com_eventcalendar/**
+!/plugins/eventcalendar/** */
 !/webpack-config/**
 !/build.sh
 !/gruntfile.js

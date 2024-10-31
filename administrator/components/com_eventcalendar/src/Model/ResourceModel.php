@@ -59,8 +59,8 @@ class ResourceModel extends AdminModel
         $loadData = false;
 
         $options = ['control' => 'jform', 'load_data' => $loadData];
-        $name = 'com_eventcalendar.event';
-        $source = 'event';
+        $name = 'com_eventcalendar.resource';
+        $source = 'resource';
 
         // Get the form.
         $form = $this->loadForm($name, $source, $options);

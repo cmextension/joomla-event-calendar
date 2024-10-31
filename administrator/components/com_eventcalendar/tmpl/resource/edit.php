@@ -35,23 +35,11 @@ $tmpl       = $tmpl ? '&tmpl=' . $tmpl : '';
     <form action="<?php echo Route::_('index.php?option=com_eventcalendar&layout=' . $layout . $tmpl . '&id=' . (int) $this->item->id); ?>" method="post" name="adminForm" id="resource-form" aria-label="<?php echo Text::_('COM_EVENTCALENDAR_MANAGER_RESOURCE_' . ((int) $this->item->id === 0 ? 'NEW' : 'EDIT'), true); ?>" class="form-validate">
         <div class="main-card">
             <?php echo HTMLHelper::_('uitab.startTabSet', 'myTab', ['active' => 'details', 'recall' => true, 'breakpoint' => 768]); ?>
-            <?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'details', Text::_('COM_EVENTCALENDAR_RESOURCE_DETAILS')); ?>
-            <div class="row">
-                <div class="col-12 col-md-6">
-                    <?php echo $form->renderField('name'); ?>
-                    <?php echo $form->renderField('event_ids'); ?>
-                    <?php echo $form->renderField('language'); ?>
-                    <?php echo $form->renderField('state'); ?>
-                </div>
-                <div class="col-12 col-md-6">
-                    <?php echo $form->renderField('event_background_color'); ?>
-                    <?php echo $form->renderField('event_text_color'); ?>
-                </div>
-            </div>
-            <?php echo HTMLHelper::_('uitab.endTab'); ?>
-            <?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'publishing', Text::_('JGLOBAL_FIELDSET_PUBLISHING')); ?>
-            <?php echo LayoutHelper::render('joomla.edit.publishingdata', $this); ?>
-            <?php echo HTMLHelper::_('uitab.endTab'); ?>
+            <?php foreach ($form->getFieldsets() as $fieldset) : ?>
+                <?php echo HTMLHelper::_('uitab.addTab', 'myTab', $fieldset->name, Text::_($fieldset->label)); ?>
+                <?php echo $form->renderFieldset($fieldset->name); ?>
+                <?php echo HTMLHelper::_('uitab.endTab'); ?>
+            <?php endforeach; ?>
             <?php echo HTMLHelper::_('uitab.endTabSet'); ?>
 
             <input type="hidden" name="task" value="">

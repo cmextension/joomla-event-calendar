@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form addfieldprefix="CMExtension\Component\EventCalendar\Administrator\Field">
-    <fieldset name="details">
-
+    <fieldset
+        name="details"
+        label="COM_EVENTCALENDAR_EVENT_DETAILS"
+        addfieldprefix="CMExtension\Component\EventCalendar\Administrator\Field"
+    >
         <field
             name="id"
             type="text"
@@ -63,7 +66,10 @@
         />
     </fieldset>
 
-    <fieldset name="publish" label="COM_EVENTCALENDAR_GROUP_LABEL_PUBLISHING_DETAILS">
+    <fieldset
+        name="publish"
+        label="JGLOBAL_FIELDSET_PUBLISHING"
+    >
         <field
             name="created"
             type="calendar"

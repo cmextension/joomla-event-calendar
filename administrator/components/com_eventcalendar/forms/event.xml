@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form>
-    <fieldset name="details" addfieldprefix="CMExtension\Component\EventCalendar\Administrator\Field">
+    <fieldset
+        name="details"
+        label="COM_EVENTCALENDAR_EVENT_DETAILS"
+        addfieldprefix="CMExtension\Component\EventCalendar\Administrator\Field"
+    >
         <field
             name="id"
             type="text"
@@ -119,22 +123,21 @@
 
         <field
             name="class_names"
-            type="textarea"
+            type="text"
             label="COM_EVENTCALENDAR_FIELD_CLASS_NAMES_LABEL"
-            rows="3"
-            cols="30"
         />
 
         <field
             name="styles"
-            type="textarea"
+            type="text"
             label="COM_EVENTCALENDAR_FIELD_STYLES_LABEL"
-            rows="3"
-            cols="30"
         />
     </fieldset>
 
-    <fieldset name="publish" label="COM_EVENTCALENDAR_GROUP_LABEL_PUBLISHING_DETAILS">
+    <fieldset
+        name="publish"
+        label="JGLOBAL_FIELDSET_PUBLISHING"
+    >
         <field
             name="created"
             type="calendar"
