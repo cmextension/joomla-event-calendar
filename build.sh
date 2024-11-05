@@ -5,7 +5,7 @@ packageDir="$buildDir/com_eventcalendar"
 packageFile="com_eventcalendar.zip"
 
 if [ ! -d $buildDir ]; then
-    echo "buildDir doesn't exist"
+    echo "$buildDir doesn't exist"
 
     if mkdir -p $buildDir; then
         echo "Created $buildDir successfully"

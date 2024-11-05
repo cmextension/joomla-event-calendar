@@ -2,7 +2,7 @@
 <extension type="component" method="upgrade">
     <name>com_eventcalendar</name>
     <author>CMExtension</author>
-    <creationDate>2024-10</creationDate>
+    <creationDate>2024-11-05</creationDate>
     <copyright>(C) 2024 CMExtension</copyright>
     <license>GNU General Public License version 2 or later</license>
     <authorEmail>cmext.vn@gmail.com</authorEmail>
