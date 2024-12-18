@@ -4,6 +4,7 @@
 !/administrator/components/com_eventcalendar/**
 !/components/com_eventcalendar/**
 !/media/com_eventcalendar/**
+!/modules/mod_eventcalendar/**
 !/plugins/eventcalendar/sample**
 !/webpack-config/**
 !/build.sh
