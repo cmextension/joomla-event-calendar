@@ -11,3 +11,5 @@
 !/gruntfile.js
 !/package.json
 !/package-lock.json
+!/README.md
+!/screenshots/**
