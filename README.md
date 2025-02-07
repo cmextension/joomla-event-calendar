@@ -110,6 +110,9 @@ Event Calendar has a module to show the calendar. The result calendar is the sam
 
 ![](screenshots/com_eventcalendar_admin_module.png)
 
+Beside showing this module at a specific position in your template, you can also show the event calendar module in an article or a custom HTML module by using `Content - Load Modules` plugin's tags `{loadposition}`, `{loadmodule}` and `{loadmoduleid}`. You can read more about this feature [here](https://docs.joomla.org/how_do_you_put_a_module_inside_an_article%3F).
+
+![](screenshots/com_eventcalendar_admin_article.png)
 
 ## License
 
