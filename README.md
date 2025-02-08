@@ -114,6 +114,48 @@ Beside showing this module at a specific position in your template, you can also
 
 ![](screenshots/com_eventcalendar_admin_article.png)
 
+## Customization
+
+Event Calendar provides 3 Joomla! events to give you ability to customize the component: `onContentPrepareForm`, `onEventCalendarPrepareEvent`, `onEventCalendarPrepareResource`.
+
+You can check the `Event Calendar - Sample` plugin to see the sample code.
+
+`onContentPrepareForm` event is used to customize the forms of event and resource. In the `Sample` plugin we add a new fieldset `Sample` and a text field `Sample` in it:
+
+```
+public function prepareForm(PrepareFormEvent $event)
+{
+    $form = $event->getForm();
+
+    $context = $form->getName();
+
+    if ($context != 'com_eventcalendar.event') {
+        return;
+    }
+
+    $_form = new \SimpleXMLElement('<form />');
+    $fields = $_form->addChild('fields');
+    $fields->addAttribute('name', 'sample');
+    $fieldset = $fields->addChild('fieldset');
+    $fieldset->addAttribute('name', 'sample');
+    $fieldset->addAttribute('label', 'Sample');
+
+    $field = $fieldset->addChild('field');
+    $field->addAttribute('name', 'sample');
+    $field->addAttribute('type', 'text');
+    $field->addAttribute('language', 'en_GB');
+    $field->addAttribute('label', 'Sample');
+
+    $form->load($_form, false);
+}
+```
+
+![](screenshots/com_eventcalendar_admin_sample_plugin.png)
+
+To save the values of your custom fields, you can use the core `onContentAfterSave` of Joomla!.
+
+`onEventCalendarPrepareEvent` and `onEventCalendarPrepareResource` are used to modify the event and resource object before they are shown in the calendar. In the `Sample` plugin, we add a custom property called `sample` with value `Sample` to the `extendedProps` of the event/resource. You can read more about this `extendedProps` property in the documentation of [vkurko/calendar](https://github.com/vkurko/calendar/).
+
 ## License
 
-GNU General Public License version 2 or later. See [LICENSE](LICENSE).
+GNU General Public License version 2 or later. See [LICENSE](LICENSE.md).
