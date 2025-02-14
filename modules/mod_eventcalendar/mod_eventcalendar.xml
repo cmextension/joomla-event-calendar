@@ -10,6 +10,9 @@
     <authorUrl>cmextension.com</authorUrl>
     <description>MOD_EVENTCALENDAR_XML_DESCRIPTION</description>
     <namespace path="src">CMExtension\Module\EventCalendar</namespace>
+     <updateservers>
+        <server type="extension" name="Event Calendar module's updates">https://raw.githubusercontent.com/cmextension/joomla-event-calendar/refs/heads/main/update-servers/mod_eventcalendar.xml</server>
+    </updateservers>
     <files>
         <folder module="mod_eventcalendar">services</folder>
         <folder>language</folder>

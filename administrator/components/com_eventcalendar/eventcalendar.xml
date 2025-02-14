@@ -30,6 +30,9 @@
             <schemapath type="mysql">sql/updates/mysql</schemapath>
         </schemas>
     </update>
+     <updateservers>
+        <server type="extension" name="Event Calendar component's updates">https://raw.githubusercontent.com/cmextension/joomla-event-calendar/refs/heads/main/update-servers/com_eventcalendar.xml</server>
+    </updateservers>
     <files folder="site">
         <folder>src</folder>
     </files>
