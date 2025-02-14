@@ -1,7 +1,7 @@
 {
   "$schema": "https://developer.joomla.org/schemas/json-schema/web_assets.json",
   "name": "com_eventcalendar",
-  "version": "0.0.2",
+  "version": "0.4.0",
   "description": "Assets for com_eventcalendar",
   "license": "GPL-2.0-or-later",
   "assets": [
@@ -16,20 +16,20 @@
     {
       "name": "com_eventcalendar.calendar-cdn",
       "type": "script",
-      "uri": "https://cdn.jsdelivr.net/npm/@event-calendar/build@3.6.1/event-calendar.min.js",
-      "version": "3.6.1"
+      "uri": "https://cdn.jsdelivr.net/npm/@event-calendar/build@3.10.0/event-calendar.min.js",
+      "version": "3.10.0"
     },
     {
       "name": "com_eventcalendar.calendar-cdn",
       "type": "style",
-      "uri": "https://cdn.jsdelivr.net/npm/@event-calendar/build@3.6.1/event-calendar.min.css",
-      "version": "3.6.1"
+      "uri": "https://cdn.jsdelivr.net/npm/@event-calendar/build@3.10.0/event-calendar.min.css",
+      "version": "3.10.0"
     },
     {
       "name": "com_eventcalendar.admin-calendar",
       "type": "script",
       "uri": "com_eventcalendar/admin-calendar.min.js",
-      "version": "0.0.2",
+      "version": "0.4.0",
       "dependencies": [
         "core",
         "jquery",
@@ -43,7 +43,7 @@
       "name": "com_eventcalendar.admin-calendar",
       "type": "style",
       "uri": "com_eventcalendar/admin-calendar.min.css",
-      "version": "0.0.2",
+      "version": "0.4.0",
       "dependencies": [
         "com_eventcalendar.calendar-cdn"
       ]
@@ -52,7 +52,7 @@
       "name": "com_eventcalendar.site-calendar",
       "type": "script",
       "uri": "com_eventcalendar/calendar.min.js",
-      "version": "0.0.2",
+      "version": "0.4.0",
       "dependencies": [
         "core",
         "jquery",
@@ -66,7 +66,7 @@
       "name": "com_eventcalendar.site-calendar",
       "type": "style",
       "uri": "com_eventcalendar/calendar.min.css",
-      "version": "0.0.2",
+      "version": "0.4.0",
       "dependencies": [
         "com_eventcalendar.calendar-cdn"
       ]
