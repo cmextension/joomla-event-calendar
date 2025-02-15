@@ -39,9 +39,9 @@
     <administration>
         <menu>COM_EVENTCALENDAR</menu>
         <submenu>
-            <menu link="option=com_eventcalendar&amp;view=calendar" view="calendar">COM_EVENTCALENDAR_SUBMENU_CALENDAR</menu>
-            <menu link="option=com_eventcalendar&amp;view=resources" view="resources">COM_EVENTCALENDAR_SUBMENU_RESOURCES</menu>
-            <menu link="option=com_eventcalendar&amp;view=events" view="events">COM_EVENTCALENDAR_SUBMENU_EVENTS</menu>
+            <menu view="calendar">COM_EVENTCALENDAR_SUBMENU_CALENDAR</menu>
+            <menu view="resources">COM_EVENTCALENDAR_SUBMENU_RESOURCES</menu>
+            <menu view="events">COM_EVENTCALENDAR_SUBMENU_EVENTS</menu>
         </submenu>
         <files folder="admin">
             <folder>forms</folder>
