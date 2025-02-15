@@ -1,7 +1,7 @@
 #!/bin/sh
 
 buildDir="build"
-version="0.4.0"
+version="0.4.1"
 
 if [ -d $buildDir ]; then
     if rm -rf $buildDir; then
