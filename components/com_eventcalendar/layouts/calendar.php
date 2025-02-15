@@ -11,6 +11,8 @@ use Joomla\CMS\Component\ComponentHelper;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
 
+\defined('_JEXEC') or die;
+
 /** @var SiteApplication $app */
 $app = Factory::getApplication();
 
