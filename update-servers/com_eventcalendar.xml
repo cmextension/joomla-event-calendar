@@ -5,6 +5,22 @@
     <element>com_eventcalendar</element>
     <client>site</client>
     <type>component</type>
+    <version>0.4.1</version>
+    <infourl>https://github.com/cmextension/joomla-event-calendar/releases/tag/v0.4.1</infourl>
+    <downloads>
+      <downloadurl type="full" format="zip">https://github.com/cmextension/joomla-event-calendar/releases/download/v0.4.0/com_eventcalendar_0.4.1.zip</downloadurl>
+    </downloads>
+    <tags>
+      <tag>stable</tag>
+    </tags>
+    <targetplatform name="joomla" version="(5.*)"/>
+  </update>
+  <update>
+    <name>Event Calendar component</name>
+    <description>Updates of Event Calendar component.</description>
+    <element>com_eventcalendar</element>
+    <client>site</client>
+    <type>component</type>
     <version>0.4.0</version>
     <infourl>https://github.com/cmextension/joomla-event-calendar/releases/tag/v0.4.0</infourl>
     <downloads>
