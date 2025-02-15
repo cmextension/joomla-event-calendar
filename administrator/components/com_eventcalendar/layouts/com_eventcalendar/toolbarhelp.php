@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * @package     EventCalendar
+ * @subpackage  com_eventcalendar
+ * @copyright   Copyright (C) 2025 CMExension
+ * @license     GNU General Public License version 2 or later
+ */
+
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
 

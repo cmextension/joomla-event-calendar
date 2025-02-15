@@ -3,7 +3,7 @@
 /**
  * @package     EventCalendar
  * @subpackage  plg_eventcalendar_sample
- * @copyright   Copyright (C) 2024 CMExension
+ * @copyright   Copyright (C) 2025 CMExension
  * @license     GNU General Public License version 2 or later
  */
 
