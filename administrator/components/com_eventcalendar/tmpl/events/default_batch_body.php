@@ -3,7 +3,7 @@
 /**
  * @package     EventCalendar
  * @subpackage  com_eventcalendar
- * @copyright   Copyright (C) 2025 CMExension
+ * @copyright   Copyright (C) 2025 CMExtension
  * @license     GNU General Public License version 2 or later
  */
 
