@@ -64,7 +64,7 @@ class HtmlView extends BaseHtmlView
      * The active search filters.
      *
      * @var    array
-     * @since  3.9.0
+     * @since  0.0.2
      */
     public $activeFilters;
 
