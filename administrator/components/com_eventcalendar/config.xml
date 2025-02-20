@@ -13,7 +13,7 @@
         <field
             name="frontend_heading"
             type="note"
-            label="COM_EVENTCALENDAR_CONFIG_FRONT_END_TOOLBAR" />>
+            label="COM_EVENTCALENDAR_CONFIG_FRONT_END_TOOLBAR" />
 
         <field
             name="default_frontend_toolbar_start"
@@ -33,7 +33,7 @@
             <field
             name="backend_heading"
             type="note"
-            label="COM_EVENTCALENDAR_CONFIG_BACK_END_TOOLBAR" />>
+            label="COM_EVENTCALENDAR_CONFIG_BACK_END_TOOLBAR" />
 
         <field
             name="default_backend_toolbar_start"
